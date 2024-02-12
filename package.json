@@ -1,0 +1,28 @@
+{
+  "name": "swapify-v2",
+  "version": "1.0.0",
+  "description": "Integrate Firebase with minimal setup using HTML, CSS, JavaScript, ESLint, and Parcel",
+  "scripts": {
+    "start": "parcel src/Html/Authentication.html --no-cache",
+    "lint": "eslint src",
+    "lint-fix": "eslint src --fix"
+  },
+  "author": {
+    "name": "John Deniel Dela Peña",
+    "email": "johndeniel.d37@gmail.com",
+    "url": "https://github.com/johndeniel"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.2",
+    "firebase": "^10.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "parcel": "^2.11.0",
+    "process": "^0.11.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johndeniel/Swapify-v2"
+  }
+}

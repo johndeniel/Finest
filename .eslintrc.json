@@ -1,0 +1,39 @@
+{
+    "env": {
+      "browser": true                 // Enables browser globals like `window` and `document`.
+    },
+
+    "globals": {
+      "process": true                 // Define 'process' as a global variable to avoid 'no-undef' errors in FirebaseInitialization.js
+    },
+    
+    "extends": "eslint:recommended",  // Extends ESLint's recommended rule set.
+
+    "parserOptions": {
+      "ecmaVersion": 6,               // Sets the ECMAScript version to 2015 (ES6).
+      "sourceType": "module"          // Allows the use of import/export syntax.
+    },
+    
+    "rules": {                        // Rules configurations:
+      "eqeqeq": "error",              // Requires using strict equality (=== and !==).
+      "no-console": "error",          // Disallows the use of console.
+      "consistent-return": "error",   // Requires a return statement in function bodies.
+      "indent": [                     // Enforces consistent indentation style.
+        "error",                      // Indicates that this rule should be enforced as an error.
+        2                             // Specifies 2 spaces for indentation.
+      ],
+      "linebreak-style": [            // Enforces consistent linebreak style.
+        "error",                      // Indicates that this rule should be enforced as an error.
+        "windows"                     // Specifies CRLF line endings (for Windows).
+      ],
+      "quotes": [                     // Enforces consistent use of single quotes.
+        "error",                      // Indicates that this rule should be enforced as an error.
+        "single"                      // Specifies single quotes.
+      ],
+      "semi": [                       // Requires or disallows semicolons at the end of statements.
+        "error",                      // Indicates that this rule should be enforced as an error.
+        "never"                       // Specifies that semicolons should never be used.
+      ]
+    }
+}
+  
