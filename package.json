@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Integrate Firebase with minimal setup using HTML, CSS, JavaScript, ESLint, and Parcel",
   "scripts": {
-    "start": "parcel src/Html/Authentication.html --no-cache",
+    "start": "parcel src/Html/index.html --no-cache",
+    "build": "parcel build src/Html/index.html",
     "lint": "eslint src/**/*.js",
     "lint-fix": "eslint src/**/*.js --fix",
     "prepare": "husky install"
