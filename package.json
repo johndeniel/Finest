@@ -4,8 +4,9 @@
   "description": "Integrate Firebase with minimal setup using HTML, CSS, JavaScript, ESLint, and Parcel",
   "scripts": {
     "start": "parcel src/Html/Authentication.html --no-cache",
-    "lint": "eslint src",
-    "lint-fix": "eslint src --fix"
+    "lint": "eslint src/**/*.js",
+    "lint-fix": "eslint src/**/*.js --fix",
+    "prepare": "husky install"
   },
   "author": {
     "name": "John Deniel Dela Peña",
@@ -18,8 +19,13 @@
   },
   "devDependencies": {
     "eslint": "^8.56.0",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
     "parcel": "^2.11.0",
     "process": "^0.11.10"
+  },
+  "lint-staged": {
+    "src/**/*.js": "eslint"
   },
   "repository": {
     "type": "git",
