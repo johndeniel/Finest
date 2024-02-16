@@ -16,7 +16,6 @@
     
     "rules": {                        // Rules configurations:
       "eqeqeq": "error",              // Requires using strict equality (=== and !==).
-      "no-console": "error",          // Disallows the use of console.
       "consistent-return": "error",   // Requires a return statement in function bodies.
       "indent": [                     // Enforces consistent indentation style.
         "error",                      // Indicates that this rule should be enforced as an error.
