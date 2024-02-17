@@ -1,37 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/Css/Home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="/src/JavaScript/Home.js" type="module"></script>
+    <title>Swapify</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/Css/Home.css" />
-  <title>Swapify</title>
-</head>
-
-<body>
-  <header>
-    <img
-      src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-      alt="Avatar" />
-  </header>
-  <aside class="navigation">
-    <div class="btn-aside">Swipe</div>
-    <div class="btn-aside">Gallery</div>
-    <div class="btn-aside">About</div>
-  </aside>
-  <main>
-    <button id="google-logout-button">Logout</button>
-  </main>
-  <aside class="chat">
-    <div class="contacts">
-      <div class="chat-card">
-        <img src="https://cdn.britannica.com/87/2087-004-264616BB/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg"
-          alt="Profile picture" class="chat-avatar" />
-        <span class="chat-name">John Doe</span>
-      </div>
+  <body>
+    <nav>
+      <img class="logo" src="/src/img/swapify logo.png" alt="swapify logo" />
+    </nav>
+    <!-- <header>
+      <img
+        src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+        alt="Avatar"
+      />
+    </header> -->
+    <div class="container">
+      <aside class="navigation">
+        <div class="aside-nav">
+          <i class="fi fi-rr-home"></i>
+          <p>Home</p>
+        </div>
+        <div class="aside-nav">
+          <i class="fi fi-rr-user"></i>
+          <p>My profile</p>
+        </div>
+        <div class="aside-nav">
+          <i class="fi fi-rr-bookmark"></i>
+          <p>Saves</p>
+        </div>
+        <div class="aside-nav">
+          <i class="fi fi-rr-settings"></i>
+          <p>Settings</p>
+        </div>
+      </aside>
+      <main>
+        <button id="google-logout-button">Logout</button>
+      </main>
+      <aside class="chat">
+        <div class="contacts">
+          <h1 class="chat-title">Contacts</h1>
+          <div class="chat-card">
+            <img
+              src="https://cdn.britannica.com/87/2087-004-264616BB/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg"
+              alt="Profile picture"
+              class="chat-avatar"
+            />
+            <span class="chat-name">John Doe</span>
+          </div>
+        </div>
+      </aside>
     </div>
-  </aside>
-  <script src="/src/JavaScript/Home.js" type="module"></script>
-</body>
-
+  </body>
 </html>

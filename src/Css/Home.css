@@ -1,14 +1,23 @@
+@import url("https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css");
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+}
+
+:root {
+  --background-color: #c3b3a4;
+  --font-color: #1d1b17;
+  --dark-color: #232323;
+  --dark-hover: #464545;
+  --light-color: #f5f5f5;
 }
 
 header {
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #f2f2f2;
 }
 
 header img {
@@ -18,45 +27,77 @@ header img {
 }
 
 aside {
-  padding: 10px;
-  height: 100px;
-  background-color: #f5f5f5;
+  padding-top: 4rem;
+  background-color: var(--dark-color);
 }
 
-.navigation {
+main {
+  background-color: var(--background-color);
+}
+
+nav {
+  background-color: var(--background-color);
+  border-bottom: solid 1px var(--dark-color);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.fi {
+  padding: 1.2rem;
+}
+
+.logo {
+  height: 3.2rem;
+  margin: 8px;
+  margin-left: 10px;
+}
+
+.navigation,
+.chat {
   float: left;
-  width: 20%;
+  height: calc(100vh - 139px);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.btn-aside {
-  height: 5rem;
-  padding: 1rem;
+.aside-nav {
+  height: 4rem;
+  padding: 6px;
+  padding-left: 2.8rem;
+  display: flex;
+  flex-direction: row;
+  color: var(--light-color);
 }
 
-.btn-aside:hover {
+.aside-nav:hover {
   cursor: pointer;
-  background-color: greenyellow;
+  background-color: var(--dark-hover);
 }
 
 .chat {
   float: right;
-  width: 20%;
 }
 
-main {
-  margin: 0 auto;
-  width: 60%;
+.chat-title {
+  margin-left: 2rem;
+  color: var(--light-color);
 }
 
 .chat-card {
+  margin: 1rem;
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  color: var(--light-color);
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.chat-card:hover {
+  background-color: var(--dark-hover);
 }
 
 .chat-avatar {
@@ -67,6 +108,5 @@ main {
 }
 
 .chat-name {
-  color: #333;
-  font-weight: bold;
+  color: var(--light-color);
 }
