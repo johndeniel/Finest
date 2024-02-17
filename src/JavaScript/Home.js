@@ -22,6 +22,38 @@ function handleGoogleSignOutResult() {
   }
 }
 
+const navLinks = document.querySelector('.navigation') 
+const navItemsData = [
+  { iconClass: 'fi fi-rr-home', 
+    text: 'Home' 
+  },
+  { iconClass: 'fi fi-rr-user', 
+    text: 'My Profile' 
+  },
+  { iconClass: 'fi fi-rr-bookmark', 
+    text: 'Saves' 
+  },
+  { iconClass: 'fi fi-rr-settings', 
+    text: 'Settings' 
+  }
+]
+
+navItemsData.forEach(nav => {
+  const holder = document.createElement('div') 
+  holder.classList.add('aside-nav')
+
+  const navIcon = document.createElement('i')
+  navIcon.className = nav.iconClass
+
+  const navTitle = document.createElement('p')
+  navTitle.textContent = nav.text 
+
+  holder.appendChild(navIcon)
+  holder.appendChild(navTitle)
+
+  navLinks.appendChild(holder)
+})
+
 const contactsList = document.querySelector('.contacts')
 const chatmates = [
   {
