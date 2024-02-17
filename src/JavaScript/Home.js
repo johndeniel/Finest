@@ -22,6 +22,7 @@ function handleGoogleSignOutResult() {
   }
 }
 
+
 const navLinks = document.querySelector('.navigation') 
 const navItemsData = [
   { iconClass: 'fi fi-rr-home', 
@@ -38,21 +39,29 @@ const navItemsData = [
   }
 ]
 
-navItemsData.forEach(nav => {
-  const holder = document.createElement('div') 
-  holder.classList.add('aside-nav')
+navItemsData.forEach(nav => {                     // Loop through each item in the navItemsData array
+  const holder = document.createElement('div')    // Create a div element to hold each navigation item
+  holder.classList.add('aside-nav')               // Add the 'aside-nav' class to the holder div
 
-  const navIcon = document.createElement('i')
-  navIcon.className = nav.iconClass
+  const navIcon = document.createElement('i')     // Create an icon element for the navigation item
+  navIcon.className = nav.iconClass               // Set the class of the icon element
 
-  const navTitle = document.createElement('p')
-  navTitle.textContent = nav.text 
+  const navTitle = document.createElement('p')    // Create a paragraph element for the navigation item text
+  navTitle.textContent = nav.text                 // Set the text content of the paragraph element
 
-  holder.appendChild(navIcon)
+  holder.appendChild(navIcon)                     // Append the icon and text elements to the holder div
   holder.appendChild(navTitle)
 
-  navLinks.appendChild(holder)
+  navLinks.appendChild(holder)                    // Append the holder div to the navigation container (navLinks)
 })
+
+navLinks.addEventListener('click', function(event) {            // Add event listener to the navigation container
+  if (event.target.classList.contains('aside-nav')) {           // Check if the clicked element is a navigation item with the class 'aside-nav'
+    const text = event.target.querySelector('p').textContent    // Get the text content of the clicked navigation item
+    alert('Clicked on: ' + text)                                // Handle the click event, for example:
+  }
+})
+
 
 const contactsList = document.querySelector('.contacts')
 const chatmates = [
@@ -70,20 +79,20 @@ const chatmates = [
   }
 ]
 
-chatmates.forEach(chatmate => {
-  const chatCard = document.createElement('div')
-  chatCard.classList.add('chat-card')
+chatmates.forEach(chatmate => {                   // Loop through each chatmate in the chatmates array
+  const chatCard = document.createElement('div')  // Create a div element to represent each chat card
+  chatCard.classList.add('chat-card')             // Add the 'chat-card' class to the chat card div
 
-  const chatAvatar = document.createElement('img')
-  chatAvatar.src = chatmate.profileImage
-  chatAvatar.classList.add('chat-avatar')
+  const chatAvatar = document.createElement('img')// Create an image element for the chatmate's profile picture
+  chatAvatar.src = chatmate.profileImage          // Set the source of the image to the chatmate's profile picture
+  chatAvatar.classList.add('chat-avatar')         // Add the 'chat-avatar' class to the image element
 
-  const chatName = document.createElement('span')
-  chatName.textContent = chatmate.name
-  chatName.classList.add('chat-name')
+  const chatName = document.createElement('span') // Create a span element for the chatmate's name
+  chatName.textContent = chatmate.name            // Set the text content of the span element to the chatmate's name
+  chatName.classList.add('chat-name')             // Add the 'chat-name' class to the span element
 
-  chatCard.appendChild(chatAvatar)
+  chatCard.appendChild(chatAvatar)                // Append the profile picture and name elements to the chat card
   chatCard.appendChild(chatName)
 
-  contactsList.appendChild(chatCard)
+  contactsList.appendChild(chatCard)              // Append the chat card to the contacts list
 })
