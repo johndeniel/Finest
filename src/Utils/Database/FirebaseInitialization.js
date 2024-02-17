@@ -1,6 +1,8 @@
 // Initialize Firebase for the application
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
+import { getDatabase } from 'firebase/database'
 
 const firebaseConfig = {
   apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
@@ -17,24 +19,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 // Get the authentication instance from the initialized app.
 export const auth = getAuth(app)
+// Get Firestore instance
+export const firestore = getFirestore(app)
+// Get Real-Time Database instance
+export const database = getDatabase(app)
 // Export the app instance for potential use by other services.
 export default app
 
 
 export function CurrentUserId() {
-  try {
-    const auth = getAuth()
-    const user = auth.currentUser
+  // Listen for authentication state changes
+  auth.onAuthStateChanged((user) => {
     if (user) {
+    // User is signed in, you can proceed with accessing data or features that require authentication
+      console.log('User is signed in:', user.uid)
       return user.uid
     } else {
-      // Handle the case where there's no current user
-      console.warn('No user currently signed in.')
-      return null // Or handle it differently based on your logic
+    // No user is signed in, handle this case accordingly
+      console.log('No user is signed in.')
     }
-  } catch (error) {
-    // Handle any errors that occur during authentication
-    console.error('Error retrieving current user:', error)
-    return null // Or handle it differently based on your error handling strategy
-  }
+    return false
+  })
 }
