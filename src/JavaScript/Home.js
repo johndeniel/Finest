@@ -71,7 +71,7 @@ const chatmates = [
 ]
 
 chatmates.forEach(chatmate => {
-  const chatCard = document.createElement('li')
+  const chatCard = document.createElement('div')
   chatCard.classList.add('chat-card')
 
   const chatAvatar = document.createElement('img')
