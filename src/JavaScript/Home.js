@@ -1,9 +1,5 @@
 import { auth } from '../Utils/Database/FirebaseInitialization'
 
-// Google Sign-Out button
-const signOutButton = document.getElementById('google-logout-button')
-signOutButton.addEventListener('click', handleGoogleSignOutResult)
-
 // Define the handleGoogleSignOutResult function
 function handleGoogleSignOutResult() {
   try {
@@ -26,16 +22,20 @@ function handleGoogleSignOutResult() {
 const navLinks = document.querySelector('.navigation') 
 const navItemsData = [
   { iconClass: 'fi fi-rr-home', 
-    text: 'Home' 
+    text: 'Swipe',
+    href: '/Swipe' 
   },
-  { iconClass: 'fi fi-rr-user', 
-    text: 'My Profile' 
+  { iconClass: 'fi fi-rr-picture', 
+    text: 'Gallery',
+    href: '/Gallery' 
   },
-  { iconClass: 'fi fi-rr-bookmark', 
-    text: 'Saves' 
+  { iconClass: 'fi fi-rr-interrogation', 
+    text: 'About',
+    href: '/About' 
   },
-  { iconClass: 'fi fi-rr-settings', 
-    text: 'Settings' 
+  { iconClass: 'fi fi-rr-settings',  
+    text: 'Logout',
+    href: '/logout' 
   }
 ]
 
@@ -51,16 +51,57 @@ navItemsData.forEach(nav => {                     // Loop through each item in t
 
   holder.appendChild(navIcon)                     // Append the icon and text elements to the holder div
   holder.appendChild(navTitle)
+  holder.href = nav.href    
 
   navLinks.appendChild(holder)                    // Append the holder div to the navigation container (navLinks)
 })
 
 navLinks.addEventListener('click', function(event) {            // Add event listener to the navigation container
   if (event.target.classList.contains('aside-nav')) {           // Check if the clicked element is a navigation item with the class 'aside-nav'
-    const text = event.target.querySelector('p').textContent    // Get the text content of the clicked navigation item
-    alert('Clicked on: ' + text)                                // Handle the click event, for example:
+    const text = event.target.querySelector('p').textContent    // Get the text content of the clicked navigation item 
+    route(event)
+    if(text === 'Logout') {
+      handleGoogleSignOutResult()
+    }
   }
 })
+
+const route = (event) => {
+  event = event || window.event
+  event.preventDefault()
+  window.history.pushState({}, '', event.target.href)
+  handleLocation()
+}
+
+const routes = {
+  '/Home': '/src/Html/Swipe.html',
+  '/Swipe': '/src/Html/Swipe.html',
+  '/Gallery': '/src/Html/Gallery.html',
+  '/About': '/src/Html/About.html',
+}
+
+const handleLocation = () => {
+  const path = window.location.pathname
+  const route = routes[path]
+  
+  fetch(route)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch HTML file')
+      }
+      return response.text()
+    })
+    .then(html => {
+      // Update the content of the <main> element with the fetched HTML
+      alert(html)
+      document.getElementById('main-page').innerHTML = html
+    })
+    .catch(error => {
+      console.error(error)
+      // Render a 404 page if the HTML file is not found
+      document.getElementById('main-page').innerHTML = '<h1>404 - Page Not Found</h1>'
+    })
+}
 
 
 const contactsList = document.querySelector('.contacts')
@@ -95,4 +136,11 @@ chatmates.forEach(chatmate => {                   // Loop through each chatmate 
   chatCard.appendChild(chatName)
 
   contactsList.appendChild(chatCard)              // Append the chat card to the contacts list
+})
+
+contactsList.addEventListener('click', function(event) {            // Add event listener to the contacts list
+  if (event.target.classList.contains('chat-card')) {               // Check if the clicked element is a chat card with the class 'chat-card'
+    const text = event.target.querySelector('span').textContent     // Get the text content of the clicked chat card's name
+    alert('Clicked on: ' + text)                                    // Handle the click event, for example: Show an alert with the name of the clicked chatmate
+  }
 })
