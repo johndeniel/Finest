@@ -1,4 +1,10 @@
-import { auth } from '../Utils/Database/FirebaseInitialization'
+import { auth, firestore } from '../Utils/Database/FirebaseInitialization'
+import { collection } from 'firebase/firestore'
+
+const chat = collection(firestore, 'chatroom')
+
+// Now you can use `citiesRef` to interact with the 'chatroom' collection
+console.log(chat)
 
 // Define the handleGoogleSignOutResult function
 function handleGoogleSignOutResult() {
@@ -74,10 +80,10 @@ const route = (event) => {
 }
 
 const routes = {
-  '/Home': '/src/Html/Swipe.html',
-  '/Swipe': '/src/Html/Swipe.html',
-  '/Gallery': '/src/Html/Gallery.html',
-  '/About': '/src/Html/About.html',
+  '/Home': '/Swipe.html',
+  '/Swipe': '/Swipe.html',
+  '/Gallery': '/Gallery.html',
+  '/About': '/About.html',
 }
 
 const handleLocation = () => {
@@ -93,7 +99,6 @@ const handleLocation = () => {
     })
     .then(html => {
       // Update the content of the <main> element with the fetched HTML
-      alert(html)
       document.getElementById('main-page').innerHTML = html
     })
     .catch(error => {

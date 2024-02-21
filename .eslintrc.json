@@ -10,7 +10,7 @@
     "extends": "eslint:recommended",  // Extends ESLint's recommended rule set.
 
     "parserOptions": {
-      "ecmaVersion": 6,               // Sets the ECMAScript version to 2015 (ES6).
+      "ecmaVersion": 2018,            // Sets the ECMAScript version to 2018.
       "sourceType": "module"          // Allows the use of import/export syntax.
     },
     
