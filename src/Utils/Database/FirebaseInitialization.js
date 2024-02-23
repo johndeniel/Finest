@@ -28,22 +28,6 @@ export const database = getDatabase(app)
 // Export the app instance for potential use by other services.
 export default app
 
-
-export function CurrentUserId() {
-  // Listen for authentication state changes
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-    // User is signed in, you can proceed with accessing data or features that require authentication
-      console.log('User is signed in:', user.uid)
-      return user.uid
-    } else {
-    // No user is signed in, handle this case accordingly
-      console.log('No user is signed in.')
-    }
-    return false
-  })
-}
-
 export function allChatrooms() {
   return collection(firestore, CHATROOM_REFERENCE)
 }

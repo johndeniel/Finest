@@ -1,20 +1,24 @@
 import { auth, allChatrooms} from '../Utils/Database/FirebaseInitialization'
 import { query, where, getDocs } from 'firebase/firestore'
 
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    const q = query(allChatrooms(), where('userIds', 'array-contains', user.uid))
+    getDocs(q)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, ' => ', doc.data())
+        })
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error)
+      })
+   
+  } else {
+    console.log('No user is signed in.')
+  }
+})
 
-// Constructing the query
-const q = query(allChatrooms(), where('userIds', 'array-contains','RZCVBq2uI6SErP4BUcC0qS8G4Az2'))
-
-// Executing the query
-getDocs(q)
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data())
-    })
-  })
-  .catch((error) => {
-    console.log('Error getting documents: ', error)
-  })
 
 // Define the handleGoogleSignOutResult function
 function handleGoogleSignOutResult() {
