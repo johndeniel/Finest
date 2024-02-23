@@ -1,10 +1,20 @@
-import { auth, firestore } from '../Utils/Database/FirebaseInitialization'
-import { collection } from 'firebase/firestore'
+import { auth, allChatrooms} from '../Utils/Database/FirebaseInitialization'
+import { query, where, getDocs } from 'firebase/firestore'
 
-const chat = collection(firestore, 'chatroom')
 
-// Now you can use `citiesRef` to interact with the 'chatroom' collection
-console.log(chat)
+// Constructing the query
+const q = query(allChatrooms(), where('userIds', 'array-contains','RZCVBq2uI6SErP4BUcC0qS8G4Az2'))
+
+// Executing the query
+getDocs(q)
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data())
+    })
+  })
+  .catch((error) => {
+    console.log('Error getting documents: ', error)
+  })
 
 // Define the handleGoogleSignOutResult function
 function handleGoogleSignOutResult() {

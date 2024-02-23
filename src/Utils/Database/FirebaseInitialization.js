@@ -1,8 +1,10 @@
 // Initialize Firebase for the application
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
+
+const CHATROOM_REFERENCE = 'chatroom'
 
 const firebaseConfig = {
   apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
@@ -40,4 +42,8 @@ export function CurrentUserId() {
     }
     return false
   })
+}
+
+export function allChatrooms() {
+  return collection(firestore, CHATROOM_REFERENCE)
 }
