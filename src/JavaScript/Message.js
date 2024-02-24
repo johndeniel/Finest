@@ -3,6 +3,7 @@ import { query, where, getDocs } from 'firebase/firestore'
 import { Chatroom } from '../Utils/Model/Chatroom'
 
 const chatroomList = []
+const userRefList = [] 
 
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -21,7 +22,8 @@ auth.onAuthStateChanged((user) => {
           chatroomList.push(chatroom)
         })
 
-        logData()
+        handleUsersInsideChatroom()
+        handleUserInformation()
       })
       .catch((error) => {
         console.error('Error retrieving chatrooms:', error)
@@ -31,14 +33,15 @@ auth.onAuthStateChanged((user) => {
   }
 })
 
-
-function logData() {
-  // Iterate through each chatroom in chatroomList
+function handleUsersInsideChatroom() {
   chatroomList.forEach((chatroom) => {
-    // Get the user IDs for the current chatroom
-    const userIds = chatroom.getUserIds()
-    // Log or use the user IDs as needed
-    console.log(getOtherUserFromChatroom(userIds))
+    userRefList.push(getOtherUserFromChatroom(chatroom.getUserIds()))
+  })
+}
+
+function handleUserInformation() {
+  userRefList.forEach((ref) => {
+    console.log(ref)
   })
 }
 
