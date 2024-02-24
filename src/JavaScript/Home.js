@@ -1,19 +1,26 @@
 import { auth, allChatrooms} from '../Utils/Database/FirebaseInitialization'
-import { query, where, getDocs } from 'firebase/firestore'
+import { query, where, getDocs} from 'firebase/firestore'
 
 auth.onAuthStateChanged((user) => {
   if (user) {
     const q = query(allChatrooms(), where('userIds', 'array-contains', user.uid))
+
     getDocs(q)
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, ' => ', doc.data())
+          const chatroomData = doc.data()
+          console.log('Chatroom ID:', doc.id)
+          console.log('Chatroom Data:', chatroomData)
+          console.log('Chatroom ID:', chatroomData.chatroomId)
+          console.log('User IDs:', chatroomData.userIds)
+          console.log('Last Message Timestamp:', chatroomData.lastMessageTimestamp)
+          console.log('Last Message Sender ID:', chatroomData.lastMessageSenderId)
+          console.log('Last Message:', chatroomData.lastMessage)
         })
       })
       .catch((error) => {
         console.log('Error getting documents: ', error)
       })
-   
   } else {
     console.log('No user is signed in.')
   }
