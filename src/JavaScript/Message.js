@@ -5,33 +5,37 @@ import { Chatroom } from '../Utils/Model/Chatroom'
 const chatroomList = []
 const userRefList = [] 
 
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    const chatroomsQuery = query(allChatroomCollectionReference(), where('userIds', 'array-contains', user.uid))
-    getDocs(chatroomsQuery)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const chatroomData = doc.data()
-          const chatroom = new Chatroom(
-            doc.id,
-            chatroomData.userIds,
-            chatroomData.lastMessageTimestamp,
-            chatroomData.lastMessageSenderId,
-            chatroomData.lastMessage
-          )
-          chatroomList.push(chatroom)
-        })
+/* run main */ main() 
 
-        handleUsersInsideChatroom()
-        handleUserInformation()
-      })
-      .catch((error) => {
-        console.error('Error retrieving chatrooms:', error)
-      })
-  } else {
-    console.log('No user is signed in.')
-  }
-})
+function main() {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      const chatroomsQuery = query(allChatroomCollectionReference(), where('userIds', 'array-contains', user.uid))
+      getDocs(chatroomsQuery)
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const chatroomData = doc.data()
+            const chatroom = new Chatroom(
+              doc.id,
+              chatroomData.userIds,
+              chatroomData.lastMessageTimestamp,
+              chatroomData.lastMessageSenderId,
+              chatroomData.lastMessage
+            )
+            chatroomList.push(chatroom)
+          })
+  
+          handleUsersInsideChatroom()
+          handleUserInformation()
+        })
+        .catch((error) => {
+          console.error('Error retrieving chatrooms:', error)
+        })
+    } else {
+      console.log('No user is signed in.')
+    }
+  })
+}
 
 function handleUsersInsideChatroom() {
   chatroomList.forEach((chatroom) => {
@@ -85,3 +89,5 @@ contactsList.addEventListener('click', function(event) {            // Add event
     alert('Clicked on: ' + text)                                    // Handle the click event, for example: Show an alert with the name of the clicked chatmate
   }
 })
+
+
