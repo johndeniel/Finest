@@ -1,5 +1,6 @@
-import { auth, allChatrooms} from '../Utils/Database/FirebaseInitialization'
-import { query, where, getDocs} from 'firebase/firestore'
+import { auth, allChatrooms } from '../Utils/Database/FirebaseInitialization'
+import { query, where, getDocs } from 'firebase/firestore'
+import { Chatroom } from '../Utils/Model/Chatroom'
 
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -9,13 +10,16 @@ auth.onAuthStateChanged((user) => {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const chatroomData = doc.data()
-          console.log('Chatroom ID:', doc.id)
-          console.log('Chatroom Data:', chatroomData)
-          console.log('Chatroom ID:', chatroomData.chatroomId)
-          console.log('User IDs:', chatroomData.userIds)
-          console.log('Last Message Timestamp:', chatroomData.lastMessageTimestamp)
-          console.log('Last Message Sender ID:', chatroomData.lastMessageSenderId)
-          console.log('Last Message:', chatroomData.lastMessage)
+          // Create a new instance of Chatroom for each document
+          const chatroom = new Chatroom(
+            doc.id,
+            chatroomData.userIds,
+            chatroomData.lastMessageTimestamp,
+            chatroomData.lastMessageSenderId,
+            chatroomData.lastMessage
+          )
+          // Log each chatroom instance
+          console.log(chatroom)
         })
       })
       .catch((error) => {
@@ -25,6 +29,7 @@ auth.onAuthStateChanged((user) => {
     console.log('No user is signed in.')
   }
 })
+
 
 
 // Define the handleGoogleSignOutResult function
