@@ -1,7 +1,7 @@
 // Initialize Firebase for the application
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore, collection } from 'firebase/firestore'
+import { getFirestore, collection, doc } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
 
 const USER_REFERENCE = 'users'
@@ -30,18 +30,18 @@ export const database = getDatabase(app)
 export default app
 
 
-export function allUserCollectionReference(){
+export function getUserDocumentReference(){
   return collection(firestore, USER_REFERENCE)
 }
 
-export function allChatrooms() {
+export function allChatroomCollectionReference() {
   return collection(firestore, CHATROOM_REFERENCE)
 }
 
 export function getOtherUserFromChatroom(userIds) {
-  if (userIds[0] === 'mmdkwmkmfaksmaskd') {
-    return allUserCollectionReference().document(userIds[1])
+  if (userIds[0] === 'RZCVBq2uI6SErP4BUcC0qS8G4Az2') {
+    return doc(getUserDocumentReference(), userIds[1])
   } else {
-    return allUserCollectionReference().document(userIds[0])
+    return doc(getUserDocumentReference(), userIds[0])
   }
 }

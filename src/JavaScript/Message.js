@@ -1,23 +1,16 @@
-import { auth, allChatrooms } from '../Utils/Database/FirebaseInitialization'
+import { auth, allChatroomCollectionReference, getOtherUserFromChatroom } from '../Utils/Database/FirebaseInitialization'
 import { query, where, getDocs } from 'firebase/firestore'
 import { Chatroom } from '../Utils/Model/Chatroom'
 
 const chatroomList = []
 
-// Listen for authentication state changes
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // Query chatrooms where the user is a member
-    const chatroomsQuery = query(allChatrooms(), where('userIds', 'array-contains', user.uid))
-    // Retrieve chatroom documents
+    const chatroomsQuery = query(allChatroomCollectionReference(), where('userIds', 'array-contains', user.uid))
     getDocs(chatroomsQuery)
       .then((querySnapshot) => {
-        // Iterate through each chatroom document
         querySnapshot.forEach((doc) => {
-          // Extract chatroom data
           const chatroomData = doc.data()
-
-          // Create a new Chatroom object
           const chatroom = new Chatroom(
             doc.id,
             chatroomData.userIds,
@@ -25,9 +18,10 @@ auth.onAuthStateChanged((user) => {
             chatroomData.lastMessageSenderId,
             chatroomData.lastMessage
           )
-          // Add the chatroom to the list
           chatroomList.push(chatroom)
         })
+
+        logData()
       })
       .catch((error) => {
         console.error('Error retrieving chatrooms:', error)
@@ -37,10 +31,16 @@ auth.onAuthStateChanged((user) => {
   }
 })
 
-console.log(chatroomList)
 
-
-
+function logData() {
+  // Iterate through each chatroom in chatroomList
+  chatroomList.forEach((chatroom) => {
+    // Get the user IDs for the current chatroom
+    const userIds = chatroom.getUserIds()
+    // Log or use the user IDs as needed
+    console.log(getOtherUserFromChatroom(userIds))
+  })
+}
 
 const contactsList = document.querySelector('.contacts')
 const chatmates = [

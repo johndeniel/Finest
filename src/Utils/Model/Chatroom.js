@@ -1,30 +1,30 @@
 export class Chatroom {
 
   constructor(chatroomId, userIds, lastMessageTimestamp, lastMessageSenderId, lastMessage) {
-    this.chatroomId = chatroomId
-    this.userIds = userIds
-    this.lastMessageTimestamp = lastMessageTimestamp
-    this.lastMessageSenderId = lastMessageSenderId
-    this.lastMessage = lastMessage
+    this._chatroomId = chatroomId
+    this._userIds = userIds
+    this._lastMessageTimestamp = lastMessageTimestamp
+    this._lastMessageSenderId = lastMessageSenderId
+    this._lastMessage = lastMessage
   }
   
   getChatroomId() {
-    return this.chatroomId
+    return this._chatroomId
   }
   
   getUserIds() {
-    return this.userIds
+    return this._userIds
   }
   
   getLastMessageTimestamp() {
-    return this.lastMessageTimestamp
+    return this._lastMessageTimestamp
   }
   
   getLastMessageSenderId() {
-    return this.lastMessageSenderId
+    return this._lastMessageSenderId
   }
   
   getLastMessage() {
-    return this.lastMessage
+    return this._lastMessage
   }
 }
