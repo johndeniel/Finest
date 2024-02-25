@@ -1,5 +1,5 @@
 import { auth, allChatroomCollectionReference, getOtherUserFromChatroom } from '../Utils/Database/FirebaseInitialization'
-import { query, where, getDocs } from 'firebase/firestore'
+import { query, where, getDocs, getDoc } from 'firebase/firestore'
 import { Chatroom } from '../Utils/Model/Chatroom'
 
 const chatroomList = []
@@ -43,10 +43,15 @@ function handleUsersInsideChatroom() {
   })
 }
 
-function handleUserInformation() {
-  userRefList.forEach((ref) => {
-    console.log(ref)
-  })
+async function handleUserInformation() {
+  try {
+    for (const ref of userRefList) {
+      const snapshot = await getDoc(ref)
+      console.log(snapshot.data())
+    }
+  } catch (error) {
+    console.error('Error retrieving user information:', error)
+  }
 }
 
 const contactsList = document.querySelector('.contacts')

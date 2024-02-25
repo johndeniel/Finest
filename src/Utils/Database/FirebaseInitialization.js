@@ -30,18 +30,16 @@ export const database = getDatabase(app)
 export default app
 
 
-export function getUserDocumentReference(){
-  return collection(firestore, USER_REFERENCE)
-}
 
 export function allChatroomCollectionReference() {
   return collection(firestore, CHATROOM_REFERENCE)
 }
 
+
 export function getOtherUserFromChatroom(userIds) {
   if (userIds[0] === 'RZCVBq2uI6SErP4BUcC0qS8G4Az2') {
-    return doc(getUserDocumentReference(), userIds[1])
+    return doc(collection(firestore, USER_REFERENCE), userIds[1])
   } else {
-    return doc(getUserDocumentReference(), userIds[0])
+    return doc(collection(firestore, USER_REFERENCE), userIds[0])
   }
 }
