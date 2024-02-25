@@ -7,17 +7,17 @@ export class User {
   }
   
   // Getter for ID
-  get id() {
+  getId() {
     return this._id
   }
   
   // Getter for fullName
-  get fullName() {
+  getFullName() {
     return this._fullName
   }
   
   // Getter for avatar
-  get avatar() {
+  getAvatar() {
     return this._avatar
   }
 }
