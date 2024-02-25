@@ -4,7 +4,8 @@
     },
 
     "globals": {
-      "process": true                 // Define 'process' as a global variable to avoid 'no-undef' errors in FirebaseInitialization.js
+      "process": true,                 // Define 'process' as a global variable to avoid 'no-undef' errors in FirebaseInitialization.js
+      "Promise": true
     },
     
     "extends": "eslint:recommended",  // Extends ESLint's recommended rule set.

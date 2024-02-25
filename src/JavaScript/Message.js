@@ -57,7 +57,6 @@ async function handleUsersInsideChatroom() {
   }
 }
 
-
 async function handleUserInformation() {
   try {
     for (const ref of listOfUserDocumentReference) {
@@ -98,7 +97,7 @@ function handleChatAvatar() {
     // Add click event listener to trigger alert with ID
     chatCard.addEventListener('click', () => {
       alert(`ID: ${chatmate.getId()}`)
-    })
+    })     
 
     chatCard.appendChild(chatAvatar)
     contactsList.appendChild(chatCard)

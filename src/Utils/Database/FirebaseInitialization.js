@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore, collection, doc } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
 
+let   currentUserId
 const USER_REFERENCE = 'users'
 const CHATROOM_REFERENCE = 'chatroom'
 
@@ -29,15 +30,30 @@ export const database = getDatabase(app)
 // Export the app instance for potential use by other services.
 export default app
 
+export async function getCurrentUserId() {
+  try {
+    currentUserId = await new Promise((resolve) => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          resolve(user.uid)
+        } else {
+          resolve(null)
+        }
+      })
+    })
+  } catch (error) {
+    console.error('Error fetching user ID:', error)
+  }
+}
 
+getCurrentUserId()
 
 export function allChatroomCollectionReference() {
   return collection(firestore, CHATROOM_REFERENCE)
 }
 
-
 export function getOtherUserFromChatroom(userIds) {
-  if (userIds[0] === 'RZCVBq2uI6SErP4BUcC0qS8G4Az2') {
+  if (userIds[0] === currentUserId) {
     return doc(collection(firestore, USER_REFERENCE), userIds[1])
   } else {
     return doc(collection(firestore, USER_REFERENCE), userIds[0])
