@@ -1,8 +1,12 @@
 // Initialize Firebase for the application
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, collection, doc } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
+
+let   currentUserId
+const USER_REFERENCE = 'users'
+const CHATROOM_REFERENCE = 'chatroom'
 
 const firebaseConfig = {
   apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
@@ -26,18 +30,32 @@ export const database = getDatabase(app)
 // Export the app instance for potential use by other services.
 export default app
 
+export async function getCurrentUserId() {
+  try {
+    currentUserId = await new Promise((resolve) => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          resolve(user.uid)
+        } else {
+          resolve(null)
+        }
+      })
+    })
+  } catch (error) {
+    console.error('Error fetching user ID:', error)
+  }
+}
 
-export function CurrentUserId() {
-  // Listen for authentication state changes
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-    // User is signed in, you can proceed with accessing data or features that require authentication
-      console.log('User is signed in:', user.uid)
-      return user.uid
-    } else {
-    // No user is signed in, handle this case accordingly
-      console.log('No user is signed in.')
-    }
-    return false
-  })
+getCurrentUserId()
+
+export function allChatroomCollectionReference() {
+  return collection(firestore, CHATROOM_REFERENCE)
+}
+
+export function getOtherUserFromChatroom(userIds) {
+  if (userIds[0] === currentUserId) {
+    return doc(collection(firestore, USER_REFERENCE), userIds[1])
+  } else {
+    return doc(collection(firestore, USER_REFERENCE), userIds[0])
+  }
 }
