@@ -1,0 +1,22 @@
+/* Style the item card */
+.item-card {
+    display: flex;                   /* Arrange content side-by-side */
+    flex-wrap: nowrap;                 /* Prevent content from wrapping */
+    width: 600px;                      /* Set a width for better layout */
+    margin: 50px auto;                 /* Center the card horizontally */
+    border: 1px solid #ddd;            /* Add a border for visual separation */
+    border-radius: 5px;               /* Add slightly rounded corners for a card-like appearance */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+}
+
+/* Style the image container */
+.item-card img {
+    width: 40%;                       /* Allocate 40% of the card width for the image */
+    object-fit: cover;                 /* Scale image to fill the container (cropping if necessary) */
+}
+
+/* Style the item info container */
+.item-info {
+    width: 60%;                       /* Allocate 60% of the card width for item information */
+    padding: 20px;                     /* Add padding for better spacing */
+}
