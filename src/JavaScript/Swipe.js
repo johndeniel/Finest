@@ -46,3 +46,16 @@ async function main() {
 
   console.log(listOfItem)
 }
+
+
+
+const swipeLeft = document.getElementById('swipe-left')
+const swipeRight = document.getElementById('swipe-right')
+
+swipeLeft.addEventListener('click', () => {
+  alert('swipe-left')
+})
+
+swipeRight.addEventListener('click', () => {
+  alert('swipe-right')
+})
