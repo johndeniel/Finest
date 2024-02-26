@@ -2,9 +2,10 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore, collection, doc } from 'firebase/firestore'
-import { getDatabase } from 'firebase/database'
+import { getDatabase, ref } from 'firebase/database'
 
 let   currentUserId
+const ITEMS_REFERENCE = 'items'
 const USER_REFERENCE = 'users'
 const CHATROOM_REFERENCE = 'chatroom'
 
@@ -47,6 +48,10 @@ export async function getCurrentUserId() {
 }
 
 getCurrentUserId()
+
+export function getItemsDatabaseReference() {
+  return ref(database, ITEMS_REFERENCE)
+}
 
 export function allChatroomCollectionReference() {
   return collection(firestore, CHATROOM_REFERENCE)
