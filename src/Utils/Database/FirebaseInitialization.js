@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore, collection, doc } from 'firebase/firestore'
-import { getDatabase, ref } from 'firebase/database'
+import { getDatabase, ref, child } from 'firebase/database'
 
 let   currentUserId
 const ITEMS_REFERENCE = 'items'
@@ -51,6 +51,10 @@ getCurrentUserId()
 
 export function getItemsDatabaseReference() {
   return ref(database, ITEMS_REFERENCE)
+}
+
+export function getSwipeLocation(itemKey) {
+  return child(child(ref(database, ITEMS_REFERENCE), itemKey), 'swipe')
 }
 
 export function allChatroomCollectionReference() {

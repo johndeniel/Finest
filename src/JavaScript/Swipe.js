@@ -1,10 +1,11 @@
-import { getItemsDatabaseReference } from '../Utils/Database/FirebaseInitialization'
+import { getItemsDatabaseReference , getSwipeLocation} from '../Utils/Database/FirebaseInitialization'
 import { get } from 'firebase/database'
 import { Item } from '../Utils/Model/Item'
 
 // Call the main function
 main()
 
+let currentItemIndex = 0 
 const listOfItem = []
 
 async function main() {
@@ -53,9 +54,37 @@ const swipeLeft = document.getElementById('swipe-left')
 const swipeRight = document.getElementById('swipe-right')
 
 swipeLeft.addEventListener('click', () => {
-  alert('swipe-left')
+  updateItemCard(currentItemIndex++)
 })
 
 swipeRight.addEventListener('click', () => {
-  alert('swipe-right')
+  updateItemCard(currentItemIndex++)
 })
+
+console.log(getSwipeLocation('-NpxGzbOv0-bOeGp3HsP'))
+
+function updateItemCard(index) {
+  const itemTitle = document.getElementById('item-title')
+  const itemAuthor = document.getElementById('item-author')
+  const itemDescription = document.getElementById('item-description')
+  const itemImg = document.getElementById('item-img')
+
+  itemTitle.textContent = listOfItem[index].getTitle()
+  itemAuthor.textContent = listOfItem[index].getFullName() 
+  itemDescription.textContent = listOfItem[index]. getDescription()
+  itemImg.src = listOfItem[index].getImageUrl()
+  updateLeftorRight()
+}
+
+// call function for updating where it left or right
+// id of target
+// location or path 
+// node of something 
+
+function updateLeftorRight (action){
+  if(action === 'right'){
+    alert('rigth')
+  }else {
+    alert('left')
+  }
+}
