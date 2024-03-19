@@ -1,8 +1,8 @@
 // Import necessary functions and classes
 import { auth, allChatroomCollectionReference, getOtherUserFromChatroom } from '../utils/firebase/database'
 import { query, where, getDocs, getDoc } from 'firebase/firestore'
-import { Chatroom } from '../Utils/models/chatroom'
-import { User } from '../Utils/models/user'
+import { Chatroom } from '../utils/models/chatroom'
+import { User } from '../utils/models/user'
 
 // Define the ContactList component
 class ContactList extends HTMLElement {
