@@ -1,6 +1,10 @@
 # Ignore node_modules directory
 node_modules/
 
+# Ignore Parcel specific files
+.parcel-cache
+dist/
+
 # Ignore npm debug log files
 npm-debug.log
 
@@ -11,7 +15,3 @@ npm-debug.log
 *.ipr
 *.iws
 .env.local
-
-# Ignore Parcel specific files
-.parcel-cache
-dist/

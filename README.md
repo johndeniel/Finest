@@ -9,7 +9,7 @@ Welcome to the Swapify Barter App – your premier platform for modern bartering
 - Firebase Realtime Database
 - Firebase Storage
 
-## Firebase, HTML, CSS, JavaScript, ESLint, and Parcel
+## HTML, CSS, JavaScript, Firebase, ESLint, and Parcel
 Follow these steps to seamlessly integrate Firebase services, including Google Authentication, into your Web Application.
 
 ## Use Node.js

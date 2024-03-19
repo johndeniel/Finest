@@ -7,23 +7,23 @@ export class Chatroom {
     this._lastMessageSenderId = lastMessageSenderId
     this._lastMessage = lastMessage
   }
-  
+    
   getChatroomId() {
     return this._chatroomId
   }
-  
+    
   getUserIds() {
     return this._userIds
   }
-  
+    
   getLastMessageTimestamp() {
     return this._lastMessageTimestamp
   }
-  
+    
   getLastMessageSenderId() {
     return this._lastMessageSenderId
   }
-  
+    
   getLastMessage() {
     return this._lastMessage
   }

@@ -9,45 +9,45 @@ export class Item {
     this._fileName = fileName
     this._imageUrl = imageUrl
   }
-  
+    
   // Getter method for key
   getKey() {
     return this._key
   }
-  
+    
   // Getter method for userId
   getUserId() {
     return this._userId
   }
-  
+    
   // Getter method for avatar
   getAvatar() {
     return this._avatar
   }
-  
+    
   // Getter method for fullName
   getFullName() {
     return this._fullName
   }
-  
+    
   // Getter method for title
   getTitle() {
     return this._title
   }
-  
+    
   // Getter method for description
   getDescription() {
     return this._description
   }
-  
+    
   // Getter method for fileName
   getFileName() {
     return this._fileName
   }
-  
+    
   // Getter method for imageUrl
   getImageUrl() {
     return this._imageUrl
   }
 }
-  
+    
