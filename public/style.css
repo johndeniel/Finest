@@ -1,0 +1,153 @@
+:root {
+    --primary: #222831;
+    --secondary: #30475e;
+    --secondary-light: #3a5a7a;
+    --accent: #f05454;
+    --neutral: #eeeeee;
+
+    font-size: 18px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: "Montserrat";
+}
+
+body {
+    color: var(--neutral);
+    padding: 1rem clamp(1.5rem, 6vw, 3rem);
+    background-color: var(--primary);
+}
+
+nav {
+    display: flex;
+}
+
+nav a {
+    margin-right: .75em;
+    color: var(--accent);
+}
+
+main {
+    margin: 3rem 0;
+}
+
+h1 {
+    font-size: 2.3rem;
+    margin-bottom: .5rem;
+}
+
+p {
+    margin-bottom: 2rem;
+}
+
+click-counter button {
+    font-weight: 600;
+    border: 2px solid var(--neutral);
+    border-radius: 5px;
+    color: var(--neutral);
+    background-color: var(--secondary);
+    width: 8.5rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    transition: opacity .1s, background-color .1s;
+}
+click-counter button:active {
+    background-color: var(--secondary-light);
+}
+
+@media (min-width: 1000px)  {
+    click-counter button {
+        cursor: pointer;
+    }
+    click-counter button:hover {
+        background-color: var(--secondary-light);
+    }
+    click-counter button:active {
+        opacity: .7;
+    }
+}
+
+
+
+/* Style the item card */
+#item-card {
+    display: flex;                   
+    flex-wrap: nowrap;                 
+    width: 600px;                     
+    margin: 50px auto;                
+    border: 1px solid #ddd;           
+    border-radius: 5px;               
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+/* Style the item info container */
+#item-info {
+    flex: 1;                         
+    padding: 20px;                     
+}
+
+/* Style the image container */
+#item-img {
+    width: 40%;                       
+    object-fit: cover;                
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Style the swipe actions */
+#swipe-left,
+#swipe-right {
+    display: inline-block;          /* Display buttons in line */
+    padding: 10px 20px;               
+    margin-top: 10px;                 
+    background-color: #f0f0f0;        
+    border: 1px solid #ddd;           
+    border-radius: 5px;               
+    cursor: pointer;                  
+    margin-left: 10px;                /* Add spacing between buttons */
+}
+
+#swipe-left:hover,
+#swipe-right:hover {
+    background-color: #e0e0e0;       
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px; /* Optional: set a max-width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .left-aside, .right-aside {
+    flex-basis: 250px; /* Set the width of the side asides */
+    background-color: #f0f2f5; /* Facebook's background color for sidebar */
+    padding: 20px;
+  }
+  
+  .main-content {
+    flex-grow: 1; /* Allow the main content to grow and fill the remaining space */
+    padding: 20px;
+    background-color: #fff; /* Main content background color */
+  }
+  
+  .swipe-left, .swipe-right {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #1877f2; /* Facebook's primary color */
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .swipe-left:hover, .swipe-right:hover {
+    background-color: #1565c0; /* Darker shade of primary color on hover */
+  }
+  
