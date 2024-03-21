@@ -1,3 +1,4 @@
+import { auth } from './utils/firebase/database'
 import renderAuth from './views/auth_view'
 import renderSwipe from './views/swipe_view'
 import renderGallery from './views/gallery_view'
@@ -14,17 +15,13 @@ const routes = {
 const router = async () => {
   const request = parseRequestUrl()
   const parseUrl =
-    (request.resource ? `/${request.resource}` : '/') +
-    (request.id ? '/:id' : '') +
-    (request.verb ? `/${request.verb}` : '')
-  console.log(request)
+  (request.resource ? `/${request.resource}` : '/') +
+  (request.id ? '/:id' : '') +
+  (request.verb ? `/${request.verb}` : '')
 
   const screen = routes[parseUrl] ? routes[parseUrl] : error404
-
   const app = document.getElementById('app')
   app.innerHTML = await screen.render()
-
-  if (screen.after_render) await screen.after_render()
 }
 
 const parseRequestUrl = () => {
@@ -48,4 +45,12 @@ const parseRequestUrl = () => {
 
 
 window.addEventListener('load', router)
+
+auth.onAuthStateChanged((user) => {
+  const redirectPath = user ? window.location.hash : '/#/auth'
+  if (window.location.hash !== redirectPath) {
+    window.location.href = redirectPath
+  }
+})
+
 window.addEventListener('hashchange', router)
