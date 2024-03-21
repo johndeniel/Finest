@@ -4,7 +4,7 @@
   "description": "SPA setup using HTML, CSS, JavaScript, Firebase, ESLint, and Parcel",
   "scripts": {
     "start": "parcel public/index.html --no-cache",
-    "build": "parcel build public/index.html",
+    "build": "parcel build public/index.html --no-cache",
     "lint": "eslint src/**/*.js",
     "lint-fix": "eslint src/**/*.js --fix",
     "prepare": "husky install"
