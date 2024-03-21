@@ -19,7 +19,7 @@ class ContactList extends HTMLElement {
       `
 
       // Get contacts asynchronously
-      const listOfContacts = await getContacts()
+      const contacts = await fetchContacts()
 
       // Set the HTML content directly to the component
       this.innerHTML = htmlContent
@@ -28,7 +28,7 @@ class ContactList extends HTMLElement {
       const contactListContainer = this.querySelector('.contact-list')
 
       // Create contact cards for each contact
-      listOfContacts.forEach(contact => {
+      contacts.forEach(contact => {
         const contactCard = document.createElement('div')
         contactCard.classList.add('contact-card')
 
@@ -54,22 +54,25 @@ class ContactList extends HTMLElement {
   }
 }
 
-// Define the getContacts function
-async function getContacts() {
-  const user = auth.currentUser
-  if (!user) {
-    throw new Error('No user is signed in.')
-  }
-
-  // Get chatrooms for the user
-  const chatrooms = await getChatrooms(user)
-  // Get users in the chatrooms
-  const users = await getUsersInChatrooms(chatrooms)
-  return users
+// Define the fetchContacts function
+async function fetchContacts() {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Get chatrooms for the user
+        fetchChatrooms(user)
+          .then(chatrooms => fetchUsersInChatrooms(chatrooms))
+          .then(users => resolve(users))
+          .catch(error => reject(error))
+      } else {
+        reject(new Error('No user is signed in.'))
+      }
+    })
+  })
 }
 
-// Get chatrooms for a user
-async function getChatrooms(user) {
+// Fetch chatrooms for a user
+async function fetchChatrooms(user) {
   const chatroomsQuery = query(allChatroomCollectionReference(), where('userIds', 'array-contains', user.uid))
   const querySnapshot = await getDocs(chatroomsQuery)
   const chatrooms = []
@@ -89,8 +92,8 @@ async function getChatrooms(user) {
   return chatrooms
 }
 
-// Get users in chatrooms
-async function getUsersInChatrooms(chatrooms) {
+// Fetch users in chatrooms
+async function fetchUsersInChatrooms(chatrooms) {
   const userRefs = chatrooms.map(chatroom => getOtherUserFromChatroom(chatroom.getUserIds()))
   const snapshots = await Promise.all(userRefs.map(ref => getDoc(ref)))
   const users = []
