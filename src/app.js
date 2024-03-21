@@ -1,11 +1,16 @@
-import renderHome from './views/home'
+import renderAuth from './views/auth_view'
+import renderSwipe from './views/swipe_view'
+import renderGallery from './views/gallery_view'
+import renderAbout from './views/about_view'
+import error404 from './views/error_view'
 import { parseRequestUrl } from './utils/utils'
-import Error404 from './views/Error404'
-import renderAuth from './views/auth'
 
 const routes = {
-  '/': renderHome,
-  '/auth': renderAuth
+  '/': renderSwipe,
+  '/auth': renderAuth,
+  '/gallery': renderGallery,
+  '/about': renderAbout
+
 }
 const router = async () => {
   //showLoading()
@@ -15,7 +20,7 @@ const router = async () => {
     (request.id ? '/:id' : '') +
     (request.verb ? `/${request.verb}` : '')
   console.log(request)
-  const screen = routes[parseUrl] ? routes[parseUrl] : Error404
+  const screen = routes[parseUrl] ? routes[parseUrl] : error404
 
   const app = document.getElementById('app')
   app.innerHTML = await screen.render()

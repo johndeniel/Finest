@@ -1,9 +1,7 @@
 import '../components/navigation.js'
 import '../components/contact.js'
-import '../components/swipe.js'
 
-// Function to render the home page content
-const renderHome = {
+const renderGallery = {
   render: async () => {
     return /*html*/ ` 
       <div class="container">
@@ -12,7 +10,7 @@ const renderHome = {
         </aside>
 
         <main class="main-content">
-          <swipe-item> </swipe-item>
+          <h1> Gallery </h1>
         </main>
 
         <aside class="right-aside">
@@ -23,4 +21,4 @@ const renderHome = {
   },
 }
 
-export default renderHome
+export default renderGallery

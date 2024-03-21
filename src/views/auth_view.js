@@ -20,7 +20,7 @@ function handleGoogleLoginButtonClick(event) {
       const provider = new GoogleAuthProvider()
       signInWithPopup(auth, provider)
         .then(() => {
-          // Redirect to Home.html after successful authentication
+          window.location.href = '/'
         })
         .catch((error) => {
           console.error('Error signing in with Google:', error)

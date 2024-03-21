@@ -4,10 +4,10 @@ class SideNavigation extends HTMLElement {
   
     this.innerHTML = /*html*/`
       <ul>
-        <li><a href="/#/auth" data-link>Swipe</a></li>
-        <li><a href="/gallery" data-link>Gallery</a></li>
-        <li><a href="/about" data-link>About</a></li>
-        <li><a href="/logout" data-link>Logout</a></li>
+        <li><a href="/">Swipe</a></li>
+        <li><a href="/#/gallery">Gallery</a></li>
+        <li><a href="/#/about">About</a></li>
+        <li><a href="/#/auth">Logout</a></li>
       </ul>
     `
   }

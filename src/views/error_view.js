@@ -1,6 +1,6 @@
-const Error404 = {
+const error404 = {
   render: () => {
     return '<div>Page not Found!</div>'
   },
 }
-export default Error404 
+export default error404 
