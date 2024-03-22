@@ -1,8 +1,8 @@
 // Import necessary functions and classes
-import { auth, getNowTimeStamp, getChatroomReference } from '../utils/firebase/database'
+import { auth, getNowTimeStamp, getChatroomMessageReference, getChatroomReference } from '../utils/firebase/database'
 import { Chatroom } from '../utils/models/chatroom.js'
 import { parseRequestUrl } from '../utils/parser.js'
-import { getDoc } from 'firebase/firestore'
+import { query, orderBy, getDoc } from 'firebase/firestore'
 
 class CustomChatElement extends HTMLElement {
   constructor() {
@@ -54,6 +54,7 @@ async function fetchChat() {
 async function handleSetupChatroom() {
   try {
     const chatRoomId = getChatroomId(currentUserUuid, recipientUuid)
+    handleSetupChatRecyclerView(chatRoomId)
     const chatroomRef = getChatroomReference(chatRoomId)
 
     console.log(chatRoomId)
@@ -68,7 +69,7 @@ async function handleSetupChatroom() {
       )
     }
 
-    console.log(chatroom)
+
 
     if (!chatroom) {
       await handleCreateNewChatroom(chatRoomId, currentUserUuid, recipientUuid)
@@ -76,6 +77,11 @@ async function handleSetupChatroom() {
   } catch (error) {
     console.error('Error handling chatroom setup:', error)
   }
+}
+
+async function handleSetupChatRecyclerView(chatroomId) {
+  const chatroomsQuery = query(getChatroomMessageReference(chatroomId), orderBy('timestamp', 'desc'))
+  console.log(chatroomsQuery)
 }
 
 async function handleCreateNewChatroom(chatRoomId, currentUserUuid, recipientUuid) {

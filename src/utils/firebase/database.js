@@ -65,6 +65,11 @@ export function getChatroomReference(chatroomId) {
   return doc(collection(firestore, CHATROOM_REFERENCE), chatroomId)
 }
 
+export function getChatroomMessageReference(chatroomId) {
+  return collection(getChatroomReference(chatroomId), CHATROOM_REFERENCE)
+
+}
+
 export function getOtherUserFromChatroom(userIds) {
   if (userIds[0] === currentUserId) {
     return doc(collection(firestore, USER_REFERENCE), userIds[1])
