@@ -149,3 +149,41 @@ click-counter button:active {
     background-color: #1565c0;
     /* Darker shade of primary color on hover */
 }
+
+
+
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px; /* Adjust as needed */
+    margin: 20px auto;
+  }
+
+  .chat-holder {
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%; /* Adjust as needed */
+    word-wrap: break-word;
+  }
+
+  .left-chat-holder {
+    background-color: #e6e6e6;
+    align-self: flex-start;
+  }
+
+  .right-chat-holder {
+    background-color: #4caf50;
+    color: white;
+    align-self: flex-end;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  span {
+    font-size: 0.8em;
+    color: #666;
+  }
