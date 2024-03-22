@@ -2,7 +2,7 @@
 import { auth, allChatroomCollectionReference, getOtherUserFromChatroom } from '../utils/firebase/database'
 import { query, where, getDocs, getDoc } from 'firebase/firestore'
 import { Chatroom } from '../utils/models/chatroom'
-import { User } from '../utils/models/user'
+import { UserModel } from '../utils/models/user'
 
 // Define the ContactList component
 class ContactList extends HTMLElement {
@@ -101,7 +101,7 @@ async function fetchUsersInChatrooms(chatrooms) {
   snapshots.forEach(snapshot => {
     if (snapshot.exists()) {
       const userData = snapshot.data()
-      const user = new User(
+      const user = new UserModel(
         snapshot.id,
         userData.fullName,
         userData.avatar

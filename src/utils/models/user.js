@@ -1,4 +1,4 @@
-export class User {
+export class UserModel {
     
   constructor(id, fullName, avatar) {
     this._id = id

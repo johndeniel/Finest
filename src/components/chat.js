@@ -1,9 +1,10 @@
 // Import necessary functions and classes
-import { auth, getNowTimeStamp, getChatroomMessageReference, getChatroomReference } from '../utils/firebase/database'
+import { auth, getNowTimeStamp, getChatroomMessageReference, getChatroomReference, allUserCollectionReference } from '../utils/firebase/database'
 import { Chatroom } from '../utils/models/chatroom.js'
 import { parseRequestUrl } from '../utils/parser.js'
 import { query, orderBy, getDoc, getDocs } from 'firebase/firestore'
 import { ConversationModel } from '../utils/models/conversation.js'
+import { UserModel } from '../utils/models/user.js'
 
 class CustomChatElement extends HTMLElement {
   constructor() {
@@ -14,6 +15,11 @@ class CustomChatElement extends HTMLElement {
     try {
       // Define HTML content for the chat component
       const htmlContent = /*html*/ `
+        <div class="avatar-container">
+          <img src="" alt="Avatar" class="avatar-img">
+          <span class="avatar-name"></span>
+        </div>
+
         <div class="chat-container">
           <!-- Messages will be rendered here -->
         </div>
@@ -30,11 +36,11 @@ class CustomChatElement extends HTMLElement {
   }
 }
 
-let chatroom
 let recipientUuid
 let currentUserUuid
+const messages = []
 
-// Define the fetchChat function to fetch chat data
+// Fetch chat data asynchronously
 async function fetchChat() {
   auth.onAuthStateChanged(async (user) => {
     try {
@@ -43,7 +49,7 @@ async function fetchChat() {
 
         let request = parseRequestUrl() 
         recipientUuid = request.id
-
+        await setupToolBar() 
         await handleSetupChatroom()
       } else {
         console.log('User is not authenticated')
@@ -54,6 +60,34 @@ async function fetchChat() {
   })
 }
 
+// Setup the toolbar with recipient's avatar and name
+async function setupToolBar() {
+  const userDocumentRef = allUserCollectionReference(recipientUuid)
+
+  try {
+    const docSnap = await getDoc(userDocumentRef)
+    if (docSnap.exists()) {
+      const userData = docSnap.data()
+      const user = new UserModel(
+        docSnap.id,
+        userData.fullName,
+        userData.avatar
+      )
+
+      // Update avatar and name elements in the DOM
+      const avatarImg = document.querySelector('.avatar-img')
+      const avatarName = document.querySelector('.avatar-name')
+
+      avatarImg.src = user.getAvatar()
+      avatarName.textContent = user.getFullName()
+    } else {
+      console.log('No such document!')
+    }
+  } catch (error) {
+    console.error('Error fetching document:', error)
+  }
+}
+
 // Handle the setup of the chatroom
 async function handleSetupChatroom() {
   try {
@@ -62,19 +96,11 @@ async function handleSetupChatroom() {
     const chatroomRef = getChatroomReference(chatRoomId)
 
     const doc = await getDoc(chatroomRef)
-    if (doc.exists) {
-      chatroom = new Chatroom(
-        doc.data().chatroomId,
-        doc.data().userIds,
-        doc.data().lastMessageTimestamp,
-        doc.data().lastMessageSenderId,
-        doc.data().lastMessage
-      )
-    }
 
-    if (!chatroom) {
+    if (!doc.exists) {
       await handleCreateNewChatroom(chatRoomId, currentUserUuid, recipientUuid)
     }
+
   } catch (error) {
     console.error('Error handling chatroom setup:', error)
   }
@@ -83,10 +109,8 @@ async function handleSetupChatroom() {
 // Setup the chat room's message view
 async function handleSetupChatRecyclerView(chatroomId) {
   const querySnapshot = query(getChatroomMessageReference(chatroomId), orderBy('timestamp', 'asc'))
-
   const messageSnapshot = await getDocs(querySnapshot)
-  const messages = []
-
+  
   messageSnapshot.forEach(doc => {
     const messageData = doc.data()
     const message = new ConversationModel(
@@ -97,17 +121,17 @@ async function handleSetupChatRecyclerView(chatroomId) {
     messages.push(message)
   })
 
-  console.log(messages)
+  renderChat()
+}
 
-
-
-  // Render messages
+// Render messages in the chat container
+async function renderChat() {
   const chatContainer = document.querySelector('.chat-container')
   messages.forEach(message => {
     const chatHolder = document.createElement('div')
     chatHolder.classList.add('chat-holder')
 
-    if (message.getSenderId() === 'RZCVBq2uI6SErP4BUcC0qS8G4Az2') {
+    if (message.getSenderId() === currentUserUuid) {
       chatHolder.classList.add('right-chat-holder')
     } else {
       chatHolder.classList.add('left-chat-holder')
@@ -148,13 +172,10 @@ function getChatroomId(currentUserUuid, recipientUuid) {
   return currentUserUuid < recipientUuid ? `${currentUserUuid}_${recipientUuid}` : `${recipientUuid}_${currentUserUuid}`
 }
 
+// Convert timestamp to formatted date string
 function convertTimestampToDateString(timestamp) {
-  // Convert Firebase Firestore Timestamp to JavaScript Date object
   const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000)
-
-  // Format the date as desired (e.g., MM/DD/YYYY HH:MM:SS)
   const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-
   return formattedDate
 }
 
