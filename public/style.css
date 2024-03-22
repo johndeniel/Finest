@@ -56,83 +56,96 @@ click-counter button {
     place-items: center;
     transition: opacity .1s, background-color .1s;
 }
+
 click-counter button:active {
     background-color: var(--secondary-light);
 }
 
-@media (min-width: 1000px)  {
+@media (min-width: 1000px) {
     click-counter button {
         cursor: pointer;
     }
+
     click-counter button:hover {
         background-color: var(--secondary-light);
     }
+
     click-counter button:active {
         opacity: .7;
     }
 }
 
-
-
-
-
-
-
 .container {
     display: flex;
     justify-content: space-between;
-    max-width: 1200px; /* Optional: set a max-width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-  }
-  
-  .left-aside, .right-aside {
-    flex-basis: 250px; /* Set the width of the side asides */
-    background-color: #f0f2f5; /* Facebook's background color for sidebar */
-    padding: 20px;
-  }
-  
-  .main-content {
-    flex-grow: 1; /* Allow the main content to grow and fill the remaining space */
-    padding: 20px;
-    background-color: #fff; /* Main content background color */
-  }
-  
-  .swipe-left, .swipe-right, .edit-item, .delete-item {
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #1877f2; /* Facebook's primary color */
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-  }
+    max-width: 1200px;
+    /* Optional: set a max-width for the container */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
 
+.left-aside,
+.right-aside {
+    flex-basis: 250px;
+    /* Set the width of the side asides */
+    background-color: #f0f2f5;
+    /* Facebook's background color for sidebar */
+    padding: 20px;
+}
 
-  /* Style the item card */
+.main-content {
+    flex-grow: 1;
+    /* Allow the main content to grow and fill the remaining space */
+    padding: 20px;
+    background-color: #fff;
+    /* Main content background color */
+}
+
+/* Style the item card */
 #item-card {
-    display: flex;                   
-    flex-wrap: nowrap;                 
-    width: 600px;                     
-    margin: 50px auto;                
-    border: 1px solid #ddd;           
-    border-radius: 5px;               
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-wrap: nowrap;
+    width: 600px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Style the item info container */
 #item-info {
-    flex: 1;                         
-    padding: 20px;                     
+    flex: 1;
+    padding: 20px;
 }
 
 /* Style the image container */
 #item-img {
-    width: 40%;                       
-    object-fit: cover;                
+    width: 40%;
+    object-fit: cover;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-  
-.swipe-left:hover, .swipe-right:hover, .edit-item:hover, .delete-item:hover {
-background-color: #1565c0; /* Darker shade of primary color on hover */
+
+.swipe-left,
+.swipe-right,
+.swipe-chat,
+.edit-item,
+.delete-item {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #1877f2;
+    /* Facebook's primary color */
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.swipe-left:hover,
+.swipe-right:hover,
+.swipe-chat:hover,
+.edit-item:hover,
+.delete-item:hover {
+    background-color: #1565c0;
+    /* Darker shade of primary color on hover */
 }

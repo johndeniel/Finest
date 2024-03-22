@@ -20,6 +20,7 @@ class SwipeItem extends HTMLElement {
             <p id="item-description"></p>
             <div class="swipe-left">Swipe Left</div>
             <div class="swipe-right">Swipe Right</div>
+            <div class="swipe-chat">Chat</div>
           </div>
           <img id="item-img" src="">
         </div>
@@ -31,6 +32,7 @@ class SwipeItem extends HTMLElement {
       // Attach event listeners
       document.querySelector('.swipe-left').addEventListener('click', handleSwipeLeft)
       document.querySelector('.swipe-right').addEventListener('click', handleSwipeRight)
+      document.querySelector('.swipe-chat').addEventListener('click', handleSwipeChat)
 
       // Fetch data and initialize the item card
       await fetchData()
@@ -95,6 +97,15 @@ function handleSwipeRight(event) {
   const button = event.target.closest('.swipe-right')
   if (button) {
     updateItemCard(listOfItems[counter++]) // Update item card with previous item
+  }
+}
+
+// Function to handle swipe chat event
+function handleSwipeChat(event) {
+  const button = event.target.closest('.swipe-chat')
+  if (button) {
+    // Perform action with contact ID, e.g., open chat or profile
+    document.location.hash = `/chat/${listOfItems[counter].getUserId()}`
   }
 }
 
