@@ -150,12 +150,12 @@ function getChatroomId(currentUserUuid, recipientUuid) {
 
 function convertTimestampToDateString(timestamp) {
   // Convert Firebase Firestore Timestamp to JavaScript Date object
-  const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000);
+  const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000)
 
   // Format the date as desired (e.g., MM/DD/YYYY HH:MM:SS)
-  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
 
-  return formattedDate;
+  return formattedDate
 }
 
 // Define the custom element for Chat
