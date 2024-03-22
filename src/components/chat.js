@@ -38,7 +38,7 @@ class CustomChatElement extends HTMLElement {
 
 let recipientUuid
 let currentUserUuid
-const messages = []
+
 
 // Fetch chat data asynchronously
 async function fetchChat() {
@@ -110,7 +110,7 @@ async function handleSetupChatroom() {
 async function handleSetupChatRecyclerView(chatroomId) {
   const querySnapshot = query(getChatroomMessageReference(chatroomId), orderBy('timestamp', 'asc'))
   const messageSnapshot = await getDocs(querySnapshot)
-  
+  const messages = []
   messageSnapshot.forEach(doc => {
     const messageData = doc.data()
     const message = new ConversationModel(
@@ -121,11 +121,11 @@ async function handleSetupChatRecyclerView(chatroomId) {
     messages.push(message)
   })
 
-  renderChat()
+  renderChat(messages)
 }
 
 // Render messages in the chat container
-async function renderChat() {
+async function renderChat(messages) {
   const chatContainer = document.querySelector('.chat-container')
   messages.forEach(message => {
     const chatHolder = document.createElement('div')
