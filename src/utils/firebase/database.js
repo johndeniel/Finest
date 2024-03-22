@@ -61,10 +61,18 @@ export function allChatroomCollectionReference() {
   return collection(firestore, CHATROOM_REFERENCE)
 }
 
+export function getChatroomReference(chatroomId) {
+  return doc(collection(firestore, CHATROOM_REFERENCE), chatroomId)
+}
+
 export function getOtherUserFromChatroom(userIds) {
   if (userIds[0] === currentUserId) {
     return doc(collection(firestore, USER_REFERENCE), userIds[1])
   } else {
     return doc(collection(firestore, USER_REFERENCE), userIds[0])
   }
+}
+
+export const getNowTimeStamp = () =>{
+  return firestore.Timestamp.now()
 }

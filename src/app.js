@@ -3,13 +3,16 @@ import renderAuth from './views/auth_view'
 import renderSwipe from './views/swipe_view'
 import renderGallery from './views/gallery_view'
 import renderAbout from './views/about_view'
+import renderChat from './views/chat_view'
 import error404 from './views/error_view'
+import { parseRequestUrl } from './utils/parser'
 
 const routes = {
   '/': renderSwipe,
   '/auth': renderAuth,
   '/gallery': renderGallery,
   '/about': renderAbout,
+  '/chat/:id': renderChat,
 }
 
 const router = async () => {
@@ -23,26 +26,6 @@ const router = async () => {
   const app = document.getElementById('app')
   app.innerHTML = await screen.render()
 }
-
-const parseRequestUrl = () => {
-  const address = document.location.hash.slice(1).split('?')[0]
-  const queryString =
-    document.location.hash.slice(1).split('?').length === 2
-      ? document.location.hash.slice(1).split('?')[1]
-      : ''
-
-  const url = address.toLowerCase() || '/'
-  const r = url.split('/')
-  const q = queryString.split('=')
-  return {
-    resource: r[1],
-    id: r[2],
-    verb: r[3],
-    name: q[0],
-    value: q[1],
-  }
-}
-
 
 window.addEventListener('load', router)
 

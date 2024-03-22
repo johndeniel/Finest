@@ -42,7 +42,7 @@ class ContactList extends HTMLElement {
         // Add click event listener to trigger action with contact ID
         contactCard.addEventListener('click', () => {
           // Perform action with contact ID, e.g., open chat or profile
-          console.log(`Contact ID: ${contact.getId()}`)
+          document.location.hash = `/chat/${contact.getId()}`
         })
 
         contactCard.appendChild(contactAvatar)
