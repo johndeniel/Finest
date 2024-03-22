@@ -74,7 +74,41 @@ click-counter button:active {
 
 
 
-/* Style the item card */
+
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px; /* Optional: set a max-width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .left-aside, .right-aside {
+    flex-basis: 250px; /* Set the width of the side asides */
+    background-color: #f0f2f5; /* Facebook's background color for sidebar */
+    padding: 20px;
+  }
+  
+  .main-content {
+    flex-grow: 1; /* Allow the main content to grow and fill the remaining space */
+    padding: 20px;
+    background-color: #fff; /* Main content background color */
+  }
+  
+  .swipe-left, .swipe-right, .edit-item, .delete-item {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #1877f2; /* Facebook's primary color */
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+
+  /* Style the item card */
 #item-card {
     display: flex;                   
     flex-wrap: nowrap;                 
@@ -98,56 +132,7 @@ click-counter button:active {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-
-/* Style the swipe actions */
-#swipe-left,
-#swipe-right {
-    display: inline-block;          /* Display buttons in line */
-    padding: 10px 20px;               
-    margin-top: 10px;                 
-    background-color: #f0f0f0;        
-    border: 1px solid #ddd;           
-    border-radius: 5px;               
-    cursor: pointer;                  
-    margin-left: 10px;                /* Add spacing between buttons */
+  
+.swipe-left:hover, .swipe-right:hover, .edit-item:hover, .delete-item:hover {
+background-color: #1565c0; /* Darker shade of primary color on hover */
 }
-
-#swipe-left:hover,
-#swipe-right:hover {
-    background-color: #e0e0e0;       
-}
-
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px; /* Optional: set a max-width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-  }
-  
-  .left-aside, .right-aside {
-    flex-basis: 250px; /* Set the width of the side asides */
-    background-color: #f0f2f5; /* Facebook's background color for sidebar */
-    padding: 20px;
-  }
-  
-  .main-content {
-    flex-grow: 1; /* Allow the main content to grow and fill the remaining space */
-    padding: 20px;
-    background-color: #fff; /* Main content background color */
-  }
-  
-  .swipe-left, .swipe-right {
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #1877f2; /* Facebook's primary color */
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .swipe-left:hover, .swipe-right:hover {
-    background-color: #1565c0; /* Darker shade of primary color on hover */
-  }
-  

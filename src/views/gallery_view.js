@@ -1,5 +1,6 @@
 import '../components/navigation.js'
 import '../components/contact.js'
+import '../components/gallery.js'
 
 const renderGallery = {
   render: async () => {
@@ -10,7 +11,7 @@ const renderGallery = {
         </aside>
 
         <main class="main-content">
-          <h1> Gallery </h1>
+          <gallery-item></gallery-item>
         </main>
 
         <aside class="right-aside">
