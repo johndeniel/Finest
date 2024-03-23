@@ -1,53 +1,53 @@
 export class Item {
   constructor(key, userId, avatar, fullName, title, description, fileName, imageUrl) {
-    this._key = key
-    this._userId = userId
-    this._avatar = avatar
-    this._fullName = fullName
-    this._title = title
-    this._description = description
-    this._fileName = fileName
-    this._imageUrl = imageUrl
+    this.key = key
+    this.userId = userId
+    this.avatar = avatar
+    this.fullName = fullName
+    this.title = title
+    this.description = description
+    this.fileName = fileName
+    this.imageUrl = imageUrl
   }
     
   // Getter method for key
   getKey() {
-    return this._key
+    return this.key
   }
     
   // Getter method for userId
   getUserId() {
-    return this._userId
+    return this.userId
   }
     
   // Getter method for avatar
   getAvatar() {
-    return this._avatar
+    return this.avatar
   }
     
   // Getter method for fullName
   getFullName() {
-    return this._fullName
+    return this.fullName
   }
     
   // Getter method for title
   getTitle() {
-    return this._title
+    return this.title
   }
     
   // Getter method for description
   getDescription() {
-    return this._description
+    return this.description
   }
     
   // Getter method for fileName
   getFileName() {
-    return this._fileName
+    return this.fileName
   }
     
   // Getter method for imageUrl
   getImageUrl() {
-    return this._imageUrl
+    return this.imageUrl
   }
 }
     

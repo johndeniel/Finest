@@ -1,12 +1,13 @@
 /* Define custom CSS variables for color scheme */
 :root {
-    --primary-color: #222831; 
-    --secondary-color: #eceef0; 
+    --primary-color: #222831;
+    --secondary-color: #eceef0;
     --accent-color: #4caf50;
-    --neutral-color: #eeeeee; 
-    --main-bg-color: #fff; 
-    --sidebar-bg-color: #f0f2f5; 
-    --hover-color: #1565c0; 
+    --neutral-color: #eeeeee;
+    --main-bg-color: #fff;
+    --sidebar-bg-color: #f0f2f5;
+    --hover-color: #1565c0;
+    --error-color: #ff0000;
 }
 
 /* Global styles for the body */
@@ -109,7 +110,7 @@ body {
 .item-swipe-right:hover,
 .item-chat-action:hover,
 .item-edit-action:hover,
-.item-delete-action:hover, 
+.item-delete-action:hover,
 .item-like-action:hover {
     background-color: var(--hover-color);
 }
@@ -174,4 +175,94 @@ body {
 .chat-message-timestamp {
     font-size: 0.8em;
     color: var(--primary-color);
+}
+
+/**********************************************************************************/
+
+/* Add CSS styles for the FAB button and upload dialog */
+.gallery-fab-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.gallery-fab-button:hover {
+    transform: scale(1.1);
+}
+
+.gallery-upload-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--hover-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-upload-dialog.active {
+    display: block;
+    opacity: 1;
+}
+
+.gallery-upload-card {
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-upload-form .hint {
+    font-size: 14px;
+    color: var(--neutral-color);
+    margin-bottom: 5px;
+}
+
+.gallery-upload-form input,
+.gallery-upload-form textarea {
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.gallery-upload-form button {
+    background-color: var(--accent-color);
+    color: var(--main-bg-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.gallery-cancel-button {
+    background-color: var(--error-color);
+}
+
+.gallery-uploaded-image {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }

@@ -4,9 +4,11 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore, collection, doc } from 'firebase/firestore'
 import { getDatabase, ref, child } from 'firebase/database'
 
+
 const ITEMS_REFERENCE = 'items'
 const USER_REFERENCE = 'users'
 const CHATROOM_REFERENCE = 'chatroom'
+
 
 const firebaseConfig = {
   apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
@@ -81,16 +83,29 @@ export function getOtherUserFromChatroom(user, chatroom) {
 }
 
 
+// Retrieves the Firestore document reference for a specific chatroom based on its ID.
+// Parameters:
+// - chatroomId: The ID of the chatroom.
+// Returns: Firestore document reference for the chatroom.
+// Example usage: const chatroomRef = getChatroomReference('chatroom_id');
 export function getChatroomReference(chatroomId) {
   return doc(collection(firestore, CHATROOM_REFERENCE), chatroomId)
 }
 
 
+// Retrieves the Firestore collection reference for chatroom messages based on the chatroom ID.
+// Parameters:
+// - chatroomId: The ID of the chatroom.
+// Returns: Firestore collection reference for chatroom messages.
+// Example usage: const messageCollectionRef = getChatroomMessageReference('chatroom_id');
 export function getChatroomMessageReference(chatroomId) {
   return collection(getChatroomReference(chatroomId), CHATROOM_REFERENCE)
 }
 
 
+// Retrieves the current timestamp from Firestore.
+// Returns: Firestore Timestamp representing the current time.
+// Example usage: const timestamp = getNowTimeStamp();
 export const getNowTimeStamp = () =>{
   return firestore.Timestamp.now()
 }
