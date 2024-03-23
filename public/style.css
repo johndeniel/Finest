@@ -1,207 +1,177 @@
+/* Define custom CSS variables for color scheme */
 :root {
-    --primary: #222831;
-    --secondary: #30475e;
-    --secondary-light: #3a5a7a;
-    --accent: #f05454;
-    --neutral: #eeeeee;
-
-    font-size: 18px;
+    --primary-color: #222831; 
+    --secondary-color: #eceef0; 
+    --accent-color: #4caf50;
+    --neutral-color: #eeeeee; 
+    --main-bg-color: #fff; 
+    --sidebar-bg-color: #f0f2f5; 
+    --hover-color: #1565c0; 
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    box-sizing: border-box;
-    font-family: "Montserrat";
-}
-
+/* Global styles for the body */
 body {
-    color: var(--neutral);
+    color: var(--neutral-color);
     padding: 1rem clamp(1.5rem, 6vw, 3rem);
-    background-color: var(--primary);
+    background-color: var(--primary-color);
 }
 
-nav {
-    display: flex;
-}
+/**********************************************************************************/
 
-nav a {
-    margin-right: .75em;
-    color: var(--accent);
-}
+/* Styles for the root container in all views */
 
-main {
-    margin: 3rem 0;
-}
-
-h1 {
-    font-size: 2.3rem;
-    margin-bottom: .5rem;
-}
-
-p {
-    margin-bottom: 2rem;
-}
-
-click-counter button {
-    font-weight: 600;
-    border: 2px solid var(--neutral);
-    border-radius: 5px;
-    color: var(--neutral);
-    background-color: var(--secondary);
-    width: 8.5rem;
-    height: 3rem;
-    display: grid;
-    place-items: center;
-    transition: opacity .1s, background-color .1s;
-}
-
-click-counter button:active {
-    background-color: var(--secondary-light);
-}
-
-@media (min-width: 1000px) {
-    click-counter button {
-        cursor: pointer;
-    }
-
-    click-counter button:hover {
-        background-color: var(--secondary-light);
-    }
-
-    click-counter button:active {
-        opacity: .7;
-    }
-}
-
-.container {
+/* Flexbox container for layout */
+.root-container {
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
-    /* Optional: set a max-width for the container */
     margin: 0 auto;
-    /* Center the container horizontally */
 }
 
+/* Main content area */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--main-bg-color);
+}
+
+/* Sidebars */
 .left-aside,
 .right-aside {
     flex-basis: 250px;
-    /* Set the width of the side asides */
-    background-color: #f0f2f5;
-    /* Facebook's background color for sidebar */
+    background-color: var(--sidebar-bg-color);
     padding: 20px;
 }
 
-.main-content {
-    flex-grow: 1;
-    /* Allow the main content to grow and fill the remaining space */
-    padding: 20px;
-    background-color: #fff;
-    /* Main content background color */
-}
+/**********************************************************************************/
 
-/* Style the item card */
-#item-card {
+/* Styles for the container of individual item cards */
+.card-item-container {
     display: flex;
     flex-wrap: nowrap;
     width: 600px;
     margin: 50px auto;
-    border: 1px solid #ddd;
+    border: 1px solid var(--secondary-color);
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Style the item info container */
-#item-info {
+.item-info-container {
     flex: 1;
     padding: 20px;
 }
 
+/* Styles for item titles */
+.item-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Styles for item author */
+.item-author {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Styles for item description */
+.item-description {
+    margin-bottom: 20px;
+}
+
 /* Style the image container */
-#item-img {
+.item-img {
     width: 40%;
     object-fit: cover;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.swipe-left,
-.swipe-right,
-.swipe-chat,
-.edit-item,
-.delete-item {
+/* Styles for action buttons */
+.item-swipe-left,
+.item-swipe-right,
+.item-chat-action,
+.item-edit-action,
+.item-delete-action,
+.item-like-action {
     cursor: pointer;
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #1877f2;
-    /* Facebook's primary color */
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--main-bg-color);
     border-radius: 5px;
     text-align: center;
 }
 
-.swipe-left:hover,
-.swipe-right:hover,
-.swipe-chat:hover,
-.edit-item:hover,
-.delete-item:hover {
-    background-color: #1565c0;
-    /* Darker shade of primary color on hover */
+/* Hover styles for action buttons */
+.item-swipe-left:hover,
+.item-swipe-right:hover,
+.item-chat-action:hover,
+.item-edit-action:hover,
+.item-delete-action:hover, 
+.item-like-action:hover {
+    background-color: var(--hover-color);
 }
 
+/**********************************************************************************/
 
-
-
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px; /* Adjust as needed */
-    margin: 20px auto;
-  }
-
-  .chat-holder {
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 70%; /* Adjust as needed */
-    word-wrap: break-word;
-  }
-
-  .left-chat-holder {
-    background-color: #e6e6e6;
-    align-self: flex-start;
-  }
-
-  .right-chat-holder {
-    background-color: #4caf50;
-    color: white;
-    align-self: flex-end;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  span {
-    font-size: 0.8em;
-    color: #666;
-  }
-
-
-     /* chat*/
-  .avatar-container {
+/* Styles for the chat avatar container */
+.chat-avatar-container {
     display: flex;
     align-items: center;
-  }
+}
 
-  .avatar-img {
+/* Styles for the chat avatar image */
+.chat-avatar-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
-  }
+}
 
-  .avatar-name {
+/* Styles for the chat avatar name */
+.chat-avatar-name {
     font-size: 16px;
-  }
+    color: var(--primary-color);
+}
+
+/* Styles for the chat message container */
+.chat-message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* Styles for each chat message holder */
+.chat-message-holder {
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Styles for left-aligned chat messages */
+.chat-message-left-holder {
+    background-color: var(--hover-color);
+    align-self: flex-start;
+}
+
+/* Styles for right-aligned chat messages */
+.chat-message-right-holder {
+    background-color: var(--accent-color);
+    align-self: flex-end;
+}
+
+/* Styles for chat message text */
+.chat-message-text {
+    margin: 0;
+}
+
+/* Styles for chat message timestamp */
+.chat-message-timestamp {
+    font-size: 0.8em;
+    color: var(--primary-color);
+}

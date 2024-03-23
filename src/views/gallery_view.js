@@ -5,17 +5,17 @@ import '../components/gallery.js'
 const renderGallery = {
   render: async () => {
     return /*html*/ ` 
-      <div class="container">
+      <div class="root-container">
         <aside class="left-aside">
-          <side-navigation></side-navigation>
+          <custom-navigation-component></custom-navigation-component>
         </aside>
 
         <main class="main-content">
-          <gallery-item></gallery-item>
+          <custom-gallery-component></custom-gallery-component>
         </main>
 
         <aside class="right-aside">
-          <contact-list></contact-list>
+          <custom-contact-list-component></custom-contact-list-component>
         </aside> 
       </div>
     `

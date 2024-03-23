@@ -1,4 +1,4 @@
-class SideNavigation extends HTMLElement {
+class Component extends HTMLElement {
   constructor() {
     super()
   
@@ -13,4 +13,5 @@ class SideNavigation extends HTMLElement {
   }
 }
   
-customElements.define('side-navigation', SideNavigation)
+// Define the custom component 
+customElements.define('custom-navigation-component', Component)

@@ -5,17 +5,17 @@ import '../components/swipe.js'
 const renderSwipe = {
   render: async () => {
     return /*html*/ ` 
-      <div class="container">
+      <div class="root-container">
         <aside class="left-aside">
-          <side-navigation></side-navigation>
+          <custom-navigation-component></custom-navigation-component>
         </aside>
 
         <main class="main-content">
-          <swipe-item> </swipe-item>
+          <custom-swipe-component></custom-swipe-component>
         </main>
 
         <aside class="right-aside">
-          <contact-list></contact-list>
+          <custom-contact-list-component></custom-contact-list-component>
         </aside> 
       </div>
     `
