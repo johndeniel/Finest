@@ -1,24 +1,24 @@
 export class UserModel {
     
   constructor(id, fullName, avatar) {
-    this._id = id
-    this._fullName = fullName
-    this._avatar = avatar
+    this.id = id
+    this.fullName = fullName
+    this.avatar = avatar
   }
     
   // Getter for ID
   getId() {
-    return this._id
+    return this.id
   }
     
   // Getter for fullName
   getFullName() {
-    return this._fullName
+    return this.fullName
   }
     
   // Getter for avatar
   getAvatar() {
-    return this._avatar
+    return this.avatar
   }
 }
     
