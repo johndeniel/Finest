@@ -23,29 +23,29 @@ class Component extends HTMLElement {
         </div>
 
         <!-- Floating Action Button (FAB) -->
-        <button class="gallery-fab-button">Upload Image</button>
+        <button class="gallery-upload-fab-button">Upload Image</button>
       
         <!-- Upload Image Dialog -->
         <div class="gallery-upload-dialog">
           <div class="gallery-upload-card">
-            <div class="gallery-card-title">Upload Image</div> 
+            <div class="gallery-upload-card-title">Upload Image</div>
 
             <form class="gallery-upload-form">
               <!-- Display selected image -->
-              <img class="gallery-uploaded-image" src="#" alt="Selected Image" style="display: none;">
-      
-              <div class="hint">Choose an image:</div>
+              <img class="gallery-upload-uploaded-image" src="#" alt="Selected Image" style="display: none;">
+
+              <div class="gallery-upload-hint">Choose an image:</div>
               <input type="file" class="gallery-upload-image" name="imageFile" accept="image/*" required>
-      
-              <div class="hint">Title:</div>
+
+              <div class="gallery-upload-hint">Title:</div>
               <input type="text" class="gallery-upload-title" name="title" required>
-      
-              <div class="hint">Description:</div>
+
+              <div class="gallery-upload-hint">Description:</div>
               <textarea class="gallery-upload-description" name="description" rows="4" required></textarea>
-      
+
               <!-- Cancel and Upload buttons in the same line -->
-              <div class="button-container">
-                <button type="button" class="gallery-cancel-button">Cancel</button>
+              <div class="gallery-upload-button-container">
+                <button type="button" class="gallery-upload-cancel-button">Cancel</button>
                 <button type="submit">Upload</button>
               </div>
             </form>
@@ -271,7 +271,7 @@ function createItemCard(item) {
 // Initializes the Floating Action Button (FAB) for uploading images and handles related logic.
 async function initializeUploadFab(user) {
   // Get the FAB button and upload dialog elements by class name
-  const fabButton = document.querySelector('.gallery-fab-button')
+  const fabButton = document.querySelector('.gallery-upload-fab-button')
   const uploadDialog = document.querySelector('.gallery-upload-dialog')
 
   // Event listener for FAB button click to show the upload dialog
@@ -287,7 +287,7 @@ async function initializeUploadFab(user) {
   })
 
   // Event listener for clicking the cancel button to hide the upload dialog
-  const cancelButton = document.querySelector('.gallery-cancel-button')
+  const cancelButton = document.querySelector('.gallery-upload-cancel-button')
 
   cancelButton.addEventListener('click', () => {
     uploadDialog.classList.remove('active') // Hide the upload dialog when cancel button is clicked
@@ -295,7 +295,7 @@ async function initializeUploadFab(user) {
 
   // Event listener for selecting an image and displaying it
   const uploadImageInput = document.querySelector('.gallery-upload-image')
-  const uploadedImage = document.querySelector('.gallery-uploaded-image')
+  const uploadedImage = document.querySelector('.gallery-upload-uploaded-image')
 
   uploadImageInput.addEventListener('change', () => {
     const file = uploadImageInput.files[0]
@@ -331,7 +331,6 @@ async function initializeUploadFab(user) {
     uploadForm.reset()
     uploadDialog.classList.remove('active')
 
-   
     await uploadFile(user, uploadImage, uploadTitle, uploadDescription)
   })
 }

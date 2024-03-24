@@ -1,5 +1,6 @@
-/* Define custom CSS variables for color scheme */
+/* Define custom CSS variables for color scheme, spacing, and font */
 :root {
+    /* Color Variables */
     --primary-color: #222831;
     --secondary-color: #eceef0;
     --accent-color: #4caf50;
@@ -8,6 +9,21 @@
     --sidebar-bg-color: #f0f2f5;
     --hover-color: #1565c0;
     --error-color: #ff0000;
+
+    /* Spacing Variables */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Font Variables */
+    --font-family: 'Roboto', sans-serif;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 18px;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
 }
 
 /* Global styles for the body */
@@ -180,7 +196,7 @@ body {
 /**********************************************************************************/
 
 /* Add CSS styles for the FAB button and upload dialog */
-.gallery-fab-button {
+.gallery-upload-fab-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -194,7 +210,7 @@ body {
     transition: transform 0.2s ease-in-out;
 }
 
-.gallery-fab-button:hover {
+.gallery-upload-fab-button:hover {
     transform: scale(1.1);
 }
 
@@ -213,6 +229,7 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
+/* Show the upload dialog when active */
 .gallery-upload-dialog.active {
     display: block;
     opacity: 1;
@@ -225,12 +242,14 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.gallery-upload-form .hint {
+/* Styling for form hints */
+.gallery-upload-form .gallery-upload-hint {
     font-size: 14px;
     color: var(--neutral-color);
     margin-bottom: 5px;
 }
 
+/* Styling for form input and textarea */
 .gallery-upload-form input,
 .gallery-upload-form textarea {
     border: 1px solid var(--secondary-color);
@@ -241,6 +260,7 @@ body {
     margin-bottom: 15px;
 }
 
+/* Styling for form buttons */
 .gallery-upload-form button {
     background-color: var(--accent-color);
     color: var(--main-bg-color);
@@ -250,18 +270,19 @@ body {
     cursor: pointer;
 }
 
-.gallery-cancel-button {
+/* Styling for cancel button */
+.gallery-upload-cancel-button {
     background-color: var(--error-color);
 }
 
-.gallery-uploaded-image {
+.gallery-upload-uploaded-image {
     max-width: 100%;
     margin-top: 10px;
     border-radius: 5px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.gallery-card-title {
+.gallery-upload-card-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
