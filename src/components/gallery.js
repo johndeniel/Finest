@@ -51,14 +51,34 @@ class Component extends HTMLElement {
             </form>
           </div>
         </div>
+
+        <!-- Edit Dialog -->
+        <div class="gallery-edit-dialog">
+          <div class="gallery-edit-dialog-content">
+            <div class="gallery-edit-dialog-title">Edit Item</div>
+
+            <form class="gallery-edit-dialog-form">
+              <label for="gallery-edit-title">Title:</label>
+              <input type="text" id="gallery-edit-title" class="gallery-edit-title" name="galleryEditTitle" required>
+
+              <label for="gallery-edit-description">Description:</label>
+              <textarea id="gallery-edit-description" class="gallery-edit-description" name="galleryEditDescription" rows="4" required></textarea>
+
+              <!-- Cancel and Save buttons in the same line -->
+              <div class="gallery-edit-dialog-button-container">
+                <button type="button" class="gallery-edit-dialog-cancel-button">Cancel</button>
+                <button type="submit">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       `
       // Set the HTML content to the component
       this.innerHTML = htmlContent
 
       // Call the script function to handle authentication state and data fetching
       await script()
-
-
 
     } catch (error) {
       // Log the error for debugging purposes
@@ -189,6 +209,33 @@ function renderTimelineWithItems(items) {
 }
 
 
+// Function to open the edit dialog and populate it with item details
+function openGalleryEditDialog(item) {
+  // Get the edit dialog element by class name
+  const editDialog = document.querySelector('.gallery-edit-dialog')
+
+  // Populate the edit dialog with item details
+  const titleInput = editDialog.querySelector('.gallery-edit-title')
+  const descriptionInput = editDialog.querySelector('.gallery-edit-description')
+  titleInput.value = item.getTitle()
+  descriptionInput.value = item.getDescription()
+
+  // Show the edit dialog
+  editDialog.classList.add('active')
+
+  // Get the cancel button inside the edit dialog
+  const cancelButton = editDialog.querySelector('.gallery-edit-dialog-cancel-button')
+
+  // Add event listener to the cancel button to hide the edit dialog
+  cancelButton.addEventListener('click', () => {
+    // Hide the edit dialog
+    editDialog.classList.remove('active')
+  })
+}
+
+
+
+
 
 // Function to create an item card
 function createItemCard(item) {
@@ -226,6 +273,11 @@ function createItemCard(item) {
     const editButton = document.createElement('div')
     editButton.classList.add('item-edit-action')
     editButton.textContent = 'Edit'
+
+    // Add event listener to the edit button
+    editButton.addEventListener('click', () => {
+      openGalleryEditDialog(item) // Call function to open edit dialog when edit button is clicked
+    })
 
     // Create and set the delete action button
     const deleteButton = document.createElement('div')
