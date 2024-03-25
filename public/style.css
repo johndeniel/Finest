@@ -301,39 +301,44 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-  }
-  
-  .gallery-edit-dialog.active {
+}
+
+.gallery-edit-dialog.active {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .gallery-edit-dialog-content {
+}
+
+.gallery-edit-card {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .gallery-edit-dialog-title {
+}
+
+.gallery-edit-card-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
-  }
-  
-  .gallery-edit-dialog-form label,
-  .gallery-edit-dialog-form input,
-  .gallery-edit-dialog-form textarea,
-  .gallery-edit-dialog-form button {
+}
+
+
+.gallery-edit-hint {
+    font-size: 14px;
+    color: var(--neutral-color);
+    margin-bottom: 5px;
+}
+
+
+.gallery-edit-form label,
+.gallery-edit-form input,
+.gallery-edit-form textarea,
+.gallery-edit-form button {
     display: block;
     margin-bottom: 10px;
     width: 100%;
-  }
-  
-  .gallery-edit-dialog-button-container button {
+}
+
+.gallery-edit-button-container button {
     margin-right: 10px;
-  }
-  
-  /* Other styles as needed */
-  
+}

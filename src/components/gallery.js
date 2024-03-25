@@ -23,7 +23,7 @@ class Component extends HTMLElement {
         </div>
 
         <!-- Floating Action Button (FAB) -->
-        <button class="gallery-upload-fab-button">Upload Image</button>
+        <button class="gallery-upload-fab-button">Add Item</button>
       
         <!-- Upload Image Dialog -->
         <div class="gallery-upload-dialog">
@@ -31,6 +31,7 @@ class Component extends HTMLElement {
             <div class="gallery-upload-card-title">Upload Image</div>
 
             <form class="gallery-upload-form">
+
               <!-- Display selected image -->
               <img class="gallery-upload-uploaded-image" src="#" alt="Selected Image" style="display: none;">
 
@@ -48,31 +49,33 @@ class Component extends HTMLElement {
                 <button type="button" class="gallery-upload-cancel-button">Cancel</button>
                 <button type="submit">Upload</button>
               </div>
+
             </form>
           </div>
         </div>
 
         <!-- Edit Dialog -->
         <div class="gallery-edit-dialog">
-          <div class="gallery-edit-dialog-content">
-            <div class="gallery-edit-dialog-title">Edit Item</div>
+          <div class="gallery-edit-card">
+            <div class="gallery-edit-card-title">Edit Item</div>
 
-            <form class="gallery-edit-dialog-form">
-              <label for="gallery-edit-title">Title:</label>
-              <input type="text" id="gallery-edit-title" class="gallery-edit-title" name="galleryEditTitle" required>
+            <form class="gallery-edit-form">
 
-              <label for="gallery-edit-description">Description:</label>
+              <div class="gallery-edit-hint">Title:</div>
+              <input type="text" class="gallery-edit-title" name="galleryEditTitle" required>
+
+              <div class="gallery-edit-hint">Description:</div>
               <textarea id="gallery-edit-description" class="gallery-edit-description" name="galleryEditDescription" rows="4" required></textarea>
 
               <!-- Cancel and Save buttons in the same line -->
-              <div class="gallery-edit-dialog-button-container">
-                <button type="button" class="gallery-edit-dialog-cancel-button">Cancel</button>
+              <div class="gallery-edit-button-container">
+                <button type="button" class="gallery-edit-cancel-button">Cancel</button>
                 <button type="submit">Save</button>
               </div>
+
             </form>
           </div>
         </div>
-
       `
       // Set the HTML content to the component
       this.innerHTML = htmlContent
@@ -209,33 +212,6 @@ function renderTimelineWithItems(items) {
 }
 
 
-// Function to open the edit dialog and populate it with item details
-function openGalleryEditDialog(item) {
-  // Get the edit dialog element by class name
-  const editDialog = document.querySelector('.gallery-edit-dialog')
-
-  // Populate the edit dialog with item details
-  const titleInput = editDialog.querySelector('.gallery-edit-title')
-  const descriptionInput = editDialog.querySelector('.gallery-edit-description')
-  titleInput.value = item.getTitle()
-  descriptionInput.value = item.getDescription()
-
-  // Show the edit dialog
-  editDialog.classList.add('active')
-
-  // Get the cancel button inside the edit dialog
-  const cancelButton = editDialog.querySelector('.gallery-edit-dialog-cancel-button')
-
-  // Add event listener to the cancel button to hide the edit dialog
-  cancelButton.addEventListener('click', () => {
-    // Hide the edit dialog
-    editDialog.classList.remove('active')
-  })
-}
-
-
-
-
 
 // Function to create an item card
 function createItemCard(item) {
@@ -276,7 +252,8 @@ function createItemCard(item) {
 
     // Add event listener to the edit button
     editButton.addEventListener('click', () => {
-      openGalleryEditDialog(item) // Call function to open edit dialog when edit button is clicked
+      // Call function to open edit dialog when edit button is clicked
+      openGalleryEditDialog(item) 
     })
 
     // Create and set the delete action button
@@ -318,6 +295,76 @@ function createItemCard(item) {
   }
 }
 
+
+
+// Function to open the edit dialog and populate it with item details
+function openGalleryEditDialog(item) {
+  // Get the edit dialog element by class name
+  const editDialog = document.querySelector('.gallery-edit-dialog')
+
+  // Populate the edit dialog with item details
+  const titleInput = editDialog.querySelector('.gallery-edit-title')
+  const descriptionInput = editDialog.querySelector('.gallery-edit-description')
+  titleInput.value = item.getTitle()
+  descriptionInput.value = item.getDescription()
+
+  // Show the edit dialog
+  editDialog.classList.add('active')
+
+  // Get the cancel button inside the edit dialog
+  const cancelButton = editDialog.querySelector('.gallery-edit-cancel-button')
+
+  // Add event listener to the cancel button to hide the edit dialog
+  cancelButton.addEventListener('click', () => {
+    // Hide the edit dialog
+    editDialog.classList.remove('active')
+  })
+
+  // Event listener for submitting the upload form and handling upload logic
+  const uploadForm = document.querySelector('.gallery-edit-form')
+  uploadForm.addEventListener('submit', async (event) => {
+    event.preventDefault() // Prevent default form submission
+
+    const title = uploadForm.querySelector('.gallery-edit-title').value
+    const description = uploadForm.querySelector('.gallery-edit-description').value
+
+    await updateItem(item, title, description) 
+
+    // Clear the form and hide the upload dialog after handling upload logic
+    uploadForm.reset()
+    editDialog.classList.remove('active')
+  })
+}
+
+
+async function updateItem(item, title, description) {
+  try {
+    // Create the data object to be uploaded to the databaseS
+    const postData = new Item(
+      item.getKey(), 
+      item.getUserId(),
+      item.getAvatar(),
+      item.getFullName(),
+      title,
+      description,
+      item.getFileName(),
+      item.getImageUrl()
+    )
+
+    // Construct the update object with the data to be updated
+    const updates = {}
+    updates[item.getKey()] = postData
+
+    // Update the database with the new data under the generated key
+    await update(getItemsDatabaseReference(), updates)
+
+    console.log('Data updated successfully in Firebase Realtime Database')
+  } catch (error) {
+    console.error('Error updating data in Firebase Realtime Database:', error.message)
+    // Handle database update failure
+  }
+
+}
 
 
 // Initializes the Floating Action Button (FAB) for uploading images and handles related logic.
@@ -433,7 +480,7 @@ async function uploadFile(user, uploadImage, uploadTitle, uploadDescription) {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           console.log('File available at', downloadURL)
-          await reatime(user, uploadImage, uploadTitle, uploadDescription, uniqueFileName, downloadURL)
+          await reatime(user, uploadTitle, uploadDescription, uniqueFileName, downloadURL)
          
         })
       }
@@ -446,8 +493,7 @@ async function uploadFile(user, uploadImage, uploadTitle, uploadDescription) {
 
 
 
-
-async function reatime(user, uploadImage, uploadTitle, uploadDescription, uniqueFileName, downloadURL) {
+async function reatime(user, uploadTitle, uploadDescription, uniqueFileName, downloadURL) {
   try {
 
     const auth = getAuth()
