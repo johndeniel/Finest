@@ -1,10 +1,8 @@
-// Import necessary functions and classes
-
 import { uploadBytesResumable, ref, getStorage, getDownloadURL, deleteObject } from 'firebase/storage'
-import { Item } from '../utils/models/item.js'
 import { getItemsDatabaseReference } from '../utils/firebase/database.js'
-import { auth } from '../utils/firebase/database.js'
 import { push, get, update } from 'firebase/database'
+import { auth } from '../utils/firebase/database.js'
+import { Item } from '../utils/models/item.js'
 import { getAuth } from 'firebase/auth'
 
 
@@ -668,8 +666,15 @@ async function editItemToDatabase(box, title, description) {
 }
 
 
+
+// Deletes an item from Cloud Storage and updates the item's data in Firebase Realtime Database.
 async function deleteOnDatabase(box) {
   try {
+    // Check if items data is available
+    if (!box) {
+      console.error('Error: Box data is missing')
+    }
+
     // Get the Cloud Storage instance
     const storage = getStorage()
 
@@ -689,29 +694,31 @@ async function deleteOnDatabase(box) {
     const fileName = box. getFileName() 
 
     // Create a reference to the file to delete
-    const desertRef = ref(storage, `${PHOTO_REFERENCE}/${userId}/${fileName}`)
+    const deleteRef = ref(storage, `${PHOTO_REFERENCE}/${userId}/${fileName}`)
 
     // Delete the file
-    deleteObject(desertRef).then(() => {
-      console.log('photo delete success')
+    deleteObject(deleteRef).then(async () => {
+      // Construct the delete object 
+      const deleteBox = {}
+
+      // Add the new data (newBox) to the update object under the item's key
+      deleteBox[box.getKey()] = null
+
+      // Use the firebase update predefined functions to commit the changes to the database.
+      // Pass in the reference to the database and the update object (editBox) containing the new data.
+      await update(getItemsDatabaseReference(), deleteBox)
+
     }).catch((error) => {
       // Log any errors that occur during the deletion process
       console.error('Error deleting item from database:', error.message)
     })
-    // Construct the update object with the data to be updated 
-    const deleteBox = {}
-    // Add the new data (newBox) to the update object under the item's key
-    deleteBox[box.getKey()] = null
-
-    // Use the firebase update predefined functions to commit the changes to the database.
-    // Pass in the reference to the database and the update object (editBox) containing the new data.
-    await update(getItemsDatabaseReference(), deleteBox)
 
   } catch (error) {
-    // Log any errors that occur during the deletion process
-    console.error('Error deleting item from database:', error.message)
-    // Optionally, you can throw the error to handle it further up the call stack
-    throw error
+    // Log an error message with the specific error message received from the catch block
+    console.error('Error deleting data in Firebase Realtime Database:', error.message)
+
+    // Throw a new Error with a specific message for failed data deletion
+    throw new Error('Failed to delete box data. Please try again later.')
   }
 }
 
