@@ -1,10 +1,10 @@
 // Import necessary functions and classes
-import { get } from 'firebase/database'
-import { uploadBytesResumable, ref, getStorage, getDownloadURL } from 'firebase/storage'
+
+import { uploadBytesResumable, ref, getStorage, getDownloadURL, deleteObject } from 'firebase/storage'
 import { Item } from '../utils/models/item.js'
 import { getItemsDatabaseReference } from '../utils/firebase/database.js'
 import { auth } from '../utils/firebase/database.js'
-import { push, update } from 'firebase/database'
+import { push, get, update } from 'firebase/database'
 import { getAuth } from 'firebase/auth'
 
 
@@ -264,6 +264,12 @@ function createItemCard(box) {
     const deleteButton = document.createElement('div')
     deleteButton.classList.add('item-delete-action')
     deleteButton.textContent = 'Delete'
+
+    // Add event listener to the delete button
+    deleteButton.addEventListener('click', () => {
+      // Call function to open delete dialog when delete button is clicked
+      deleteOnDatabase(box) 
+    })
    
     // Create and set the like action button
     const likeButton = document.createElement('div')
@@ -661,6 +667,53 @@ async function editItemToDatabase(box, title, description) {
   }
 }
 
+
+async function deleteOnDatabase(box) {
+  try {
+    // Get the Cloud Storage instance
+    const storage = getStorage()
+
+    // Define the reference path for uploaded photos
+    const PHOTO_REFERENCE = 'uploads'
+
+    // Get the authentication instance
+    const auth = getAuth()
+
+    // Get the current user from the authentication instance
+    const user = auth.currentUser
+ 
+    // Retrieve user information for the item
+    const userId = user.uid
+
+    // Retrieve fileName information for the item
+    const fileName = box. getFileName() 
+
+    // Create a reference to the file to delete
+    const desertRef = ref(storage, `${PHOTO_REFERENCE}/${userId}/${fileName}`)
+
+    // Delete the file
+    deleteObject(desertRef).then(() => {
+      console.log('photo delete success')
+    }).catch((error) => {
+      // Log any errors that occur during the deletion process
+      console.error('Error deleting item from database:', error.message)
+    })
+    // Construct the update object with the data to be updated 
+    const deleteBox = {}
+    // Add the new data (newBox) to the update object under the item's key
+    deleteBox[box.getKey()] = null
+
+    // Use the firebase update predefined functions to commit the changes to the database.
+    // Pass in the reference to the database and the update object (editBox) containing the new data.
+    await update(getItemsDatabaseReference(), deleteBox)
+
+  } catch (error) {
+    // Log any errors that occur during the deletion process
+    console.error('Error deleting item from database:', error.message)
+    // Optionally, you can throw the error to handle it further up the call stack
+    throw error
+  }
+}
 
 // Define the custom component 
 customElements.define('custom-gallery-component', Component)
