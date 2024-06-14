@@ -2,7 +2,7 @@
   "name": "finest",
   "version": "1.0.0",
   "scripts": {
-    "dev": "theme watch --allow-live"
+    "dev": "shopify theme dev"
   },
   "author": {
     "name": "John Deniel Dela Peña",
