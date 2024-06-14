@@ -1,0 +1,14 @@
+{
+  "name": "finest",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "theme watch --allow-live"
+  },
+  "author": {
+    "name": "John Deniel Dela Peña",
+    "email": "johndeniel.d37@gmail.com",
+    "url": "https://github.com/johndeniel"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
