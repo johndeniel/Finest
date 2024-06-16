@@ -1,0 +1,29 @@
+{
+    "header": {
+      "logo_image": {
+        "src": "path/to/your/logo.png",
+        "alt": "Your Logo Alt Text"
+      },
+      "cart_icon": {
+        "src": "path/to/your/cart-icon.png",
+        "alt": "Cart Icon Alt Text"
+      },
+      "main_menu": {
+        "links": [
+          {
+            "url": "/",
+            "title": "Home"
+          },
+          {
+            "url": "/shop",
+            "title": "Shop"
+          },
+          {
+            "url": "/about",
+            "title": "About Us"
+          }
+        ]
+      }
+    }
+  }
+  

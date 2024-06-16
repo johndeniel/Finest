@@ -1,0 +1,17 @@
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <a href="{{ shop.url }}">
+        <img src="{{ settings.logo_image | img_url: '200x' }}" alt="{{ shop.name }}">
+      </a>
+    </div>
+    {% include 'navigation' %} 
+    {% include 'search-bar' %}
+    <div class="cart-icon">
+      <a href="/cart">
+        <img src="{{ settings.cart_icon | img_url: '30x' }}" alt="Cart">
+        <span class="cart-count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>

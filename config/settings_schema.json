@@ -1,11 +1,26 @@
 [
-    {
-      "name": "finest",
-      "settings": [
-        {
-          "content": "Theme Settings"
-        }
-      ]
-    }
-  ]
-  
+  {
+    "name": "Finest",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Theme Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_icon",
+        "label": "Cart Icon"
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Main Navigation Menu"
+      }
+    ]
+  }
+]

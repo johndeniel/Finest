@@ -1,8 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  {{ content_for_header }}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  {{ content_for_header}} 
 </head>
 <body>
+  {% section 'header' %}
   {{ content_for_layout }}
 </body>
 </html>
