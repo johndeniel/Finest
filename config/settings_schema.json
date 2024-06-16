@@ -8,11 +8,6 @@
       },
       {
         "type": "image_picker",
-        "id": "logo_image",
-        "label": "Logo Image"
-      },
-      {
-        "type": "image_picker",
         "id": "cart_icon",
         "label": "Cart Icon"
       },

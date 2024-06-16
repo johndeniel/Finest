@@ -1,17 +1,23 @@
+<!-- Header Section -->
 <header>
   <div class="header-container">
+    <!-- Logo Section -->
     <div class="logo">
-      <a href="{{ shop.url }}">
-        <img src="{{ settings.logo_image | img_url: '200x' }}" alt="{{ shop.name }}">
-      </a>
+      {{ shop.name }}
     </div>
-    {% include 'navigation' %} 
-    {% include 'search-bar' %}
-    <div class="cart-icon">
-      <a href="/cart">
-        <img src="{{ settings.cart_icon | img_url: '30x' }}" alt="Cart">
-        <span class="cart-count">{{ cart.item_count }}</span>
-      </a>
+    
+    <!-- Main Navigation -->
+    {% include 'navigation' %}
+    
+    <!-- Search Bar and Cart Icon -->
+    <div class="header-right">
+      {% include 'search-bar' %}
+      <div class="cart-icon">
+        <a href="/cart">
+          <img src="{{ settings.cart_icon | img_url: '30x' }}" alt="Cart">
+          <span class="cart-count">{{ cart.item_count }}</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>
