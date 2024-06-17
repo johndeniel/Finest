@@ -5,19 +5,181 @@
     <div class="logo">
       {{ shop.name }}
     </div>
-    
+
     <!-- Main Navigation -->
-    {% include 'navigation' %}
-    
+    {% render 'navigation' %}
+
     <!-- Search Bar and Cart Icon -->
     <div class="header-right">
-      {% include 'search-bar' %}
+      {% render 'search-bar' %}
       <div class="cart-icon">
         <a href="/cart">
-          <img src="{{ settings.cart_icon | img_url: '30x' }}" alt="Cart">
+          <img src="{{ settings.cart_icon | image_url: width: 30 }}" alt="Cart" width="30" height="30">
           <span class="cart-count">{{ cart.item_count }}</span>
         </a>
       </div>
     </div>
   </div>
 </header>
+
+{% style %}
+/* Header Styles */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+/* Logo Styles */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+/* Navigation Styles */
+.main-navigation {
+  flex: 2;
+  text-align: center;
+}
+
+.main-menu {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-menu li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.main-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: color 0.3s;
+}
+
+.main-menu a:hover {
+  color: #007bff;
+}
+
+/* Header Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* Search Bar Styles */
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.search-button {
+  padding: 6px 12px;
+  border: 1px solid #007bff;
+  border-left: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Cart Icon Styles */
+.cart-icon {
+  position: relative;
+}
+
+.cart-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+/* Responsive Styles */
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .main-navigation {
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+
+  .main-menu li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .header-right {
+    order: 2;
+  }
+}
+
+/* Small devices (phones, 480px and up) */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .main-menu a {
+    font-size: 16px;
+  }
+
+  .search-input {
+    width: 100px;
+  }
+}
+
+/* Extra Small devices (phones, less than 480px) */
+@media (max-width: 320px) {
+  .search-input {
+    width: 80px;
+  }
+
+  .main-menu li {
+    margin: 5px 0;
+  }
+}
+{% endstyle %}
