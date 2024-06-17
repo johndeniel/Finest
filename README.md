@@ -6,11 +6,6 @@ Dive into the cutting-edge world of Shopify theme customization with this reposi
 ## Run Scripts
 To start the development environment, use either of the following commands:
 
-- Using npm:
-```bash
-npm run dev
-
-```
 - Using Shopify CLI :
 ```bash
 shopify theme dev

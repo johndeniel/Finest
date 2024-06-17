@@ -1,5 +1,13 @@
 [
   {
+    "name": "theme_info",
+    "theme_name": "Finest",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/johndeniel/Finest",
+    "theme_support_url": "https://github.com/johndeniel/Finest"
+  },
+  {
     "name": "Finest",
     "settings": [
       {
