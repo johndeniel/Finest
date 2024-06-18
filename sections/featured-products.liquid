@@ -1,41 +1,122 @@
-{% for product in collections.frontpage.products %}
-  <div class="product-card">
-    <h1 class="product-title">{{ product.title }}</h1>
-    <img class="product-image" src="{{ product.featured_image | image_url: width: 330 }}" alt="{{ product.title }}" width="330" height="330">
-    <a class="product-link" href="{{ product.url }}">{{ product.title }}</a>
+<div class="product-grid-wrapper">
+  <div class="product-grid">
+    {% for product in collections.frontpage.products %}
+      <a class="product-link" href="{{ product.url }}">
+        <div class="image-wrapper">
+          <img
+            class="product-image"
+            src="{{ product.featured_image | image_url: width: 330 }}"
+            alt="{{ product.title }}"
+            width="330"
+            height="430"
+          >
+          {% if product.available == false %}
+            <span class="badge sold-out">Sold Out</span>
+          {% elsif product.compare_at_price > product.price %}
+            <span class="badge sale">Sale</span>
+          {% endif %}
+        </div>
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="product-price">
+          {% if product.compare_at_price %}
+            <span class="compare-price">{{ product.compare_at_price | money }}</span>
+          {% endif %}
+          <span class="current-price">{{ product.price | money }}</span>
+        </p>
+      </a>
+    {% endfor %}
   </div>
-{% endfor %}
+</div>
 
 {% style %}
-.product-card {
-  border: 1px solid #e1e1e1;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 16px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  .product-grid-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-.product-title {
-  font-size: 1.5em;
-  margin-bottom: 8px;
-}
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    max-width: 1200px; /* Set maximum width */
+    width: 100%; /* Take full width of the container */
+    margin: 0 auto; /* Center the grid horizontally */
+  }
 
-.product-image {
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
+  .product-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    color: inherit; /* Inherit color from parent */
+  }
 
-.product-link {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #5cb85c;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
+  .product-link:hover .product-image {
+    transform: scale(1.05);
+  }
 
-.product-link:hover {
-  background-color: #4cae4c;
-}
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 130%; /* Aspect ratio of 330px width to 430px height */
+    overflow: hidden;
+  }
+
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+
+  .product-title {
+    margin-top: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  .product-price {
+    margin-top: 8px;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  .compare-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .current-price {
+    color: inherit; /* Inherit color from parent */
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
 {% endstyle %}
