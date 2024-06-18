@@ -1,0 +1,41 @@
+{% for product in collections.frontpage.products %}
+  <div class="product-card">
+    <h1 class="product-title">{{ product.title }}</h1>
+    <img class="product-image" src="{{ product.featured_image | image_url: width: 330 }}" alt="{{ product.title }}" width="330" height="330">
+    <a class="product-link" href="{{ product.url }}">{{ product.title }}</a>
+  </div>
+{% endfor %}
+
+{% style %}
+.product-card {
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.product-image {
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.product-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #5cb85c;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.product-link:hover {
+  background-color: #4cae4c;
+}
+{% endstyle %}
