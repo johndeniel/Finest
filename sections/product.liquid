@@ -1,16 +1,161 @@
-<h1>{{ product.title }}</h1>
-<p>{{ product.price | money }}</p>
-<img src="{{ product.featured_image | image_url: width: 330 }}" alt="{{ product.title }}" width="330" height="330">
-<p>{{ product.description }}</p>
+<div class="product-container">
+  <!-- Product Image -->
+  <div class="product-image">
+    <img
+      src="{{ product.featured_image | image_url: width: 330 }}"
+      alt="{{ product.title }}"
+      width="330"
+      height="430"
+    >
+  </div>
 
-{% form 'product', product %}
-  <!-- Hidden input to specify the product variant ID -->
-  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+  <!-- Product Details -->
+  <div class="product-details">
+    <!-- Product Title -->
+    <h1>{{ product.title }}</h1>
 
-  <!-- Quantity input field -->
-  <label for="quantity">Quantity:</label>
-  <input type="number" id="quantity" name="quantity" value="1" min="1">
+    <!-- Product Price with Compare Price -->
+    <p class="product-price">
+      <span class="compare-price">{{ product.compare_at_price | money }}</span>
+      <span class="actual-price">{{ product.price | money }}</span>
+    </p>
 
-  <!-- Add to Cart button -->
-  <button type="submit">Add to Cart</button>
-{% endform %}
+    <!-- Product Form -->
+    {% form 'product', product %}
+      <!-- Hidden input to specify the product variant ID -->
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      <!-- Quantity Input Field -->
+      <div class="quantity-input">
+        <div class="quantity-controls">
+          <div class="quantity-btn minus-btn">-</div>
+          <input type="number" id="quantity" name="quantity" value="1" min="1">
+          <div class="quantity-btn plus-btn">+</div>
+        </div>
+      </div>
+
+      <!-- Add to Cart Button (now a button) -->
+      <button type="submit" class="add-to-cart-button">Add to Cart</button>
+    {% endform %}
+
+    <!-- Buy Now Button (now a button) -->
+    <button type="button" class="buy-now-button">Buy Now</button>
+
+    <!-- Product Description (left-aligned) -->
+    <p style="text-align: left;">{{ product.description }}</p>
+  </div>
+</div>
+
+{% style %}
+  /* General styles */
+  .product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+
+  .product-image,
+  .product-details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 330px;
+  }
+
+  .compare-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .product-details {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  /* Quantity input styles */
+  .quantity-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .quantity-btn {
+    padding: 0.3em 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  input[type='number'] {
+    width: 60px;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  /* Button styles */
+  .add-to-cart-button,
+  .buy-now-button {
+    padding: 0.8em 1em; /* Increased padding for a more clickable area */
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 100%;
+    max-width: 150px; /* Adjusted max-width for a more uniform appearance */
+    text-align: center;
+  }
+
+  .add-to-cart-button:hover,
+  .buy-now-button:hover {
+    background-color: #e6e6e6;
+    border-color: #000;
+  }
+
+  .buy-now-button {
+    background-color: #f0f0f0;
+  }
+{% endstyle %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get DOM elements
+    const quantityInput = document.getElementById('quantity');
+    const minusBtn = document.querySelector('.minus-btn');
+    const plusBtn = document.querySelector('.plus-btn');
+    const addToCartButton = document.querySelector('.add-to-cart-button');
+    const buyNowButton = document.querySelector('.buy-now-button');
+
+    // Event listeners for quantity controls
+    minusBtn.addEventListener('click', () => {
+      if (parseInt(quantityInput.value) > 1) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+      }
+    });
+
+    plusBtn.addEventListener('click', () => {
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    // Event listener for Add to Cart button
+    addToCartButton.addEventListener('click', () => {
+      // Handle adding product to cart
+      // Example: form.submit();
+    });
+
+    // Event listener for Buy Now button
+    buyNowButton.addEventListener('click', () => {
+      // Redirect to checkout page
+      window.location.href = '/checkout';
+    });
+  });
+{% endjavascript %}
